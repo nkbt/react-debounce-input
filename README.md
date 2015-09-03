@@ -9,3 +9,117 @@
 [![devDependency Status](https://david-dm.org/nkbt/react-debounce-input/dev-status.svg)](https://david-dm.org/nkbt/react-debounce-input#info=devDependencies)
 
 React component that renders Input with debounced onChange
+
+
+
+![React Debounce Input](src/example/react-debounce-input.gif)
+
+
+## Installation
+
+### npm
+
+```sh
+npm install --save react-debounce-input
+```
+
+### bower
+
+Coming soon
+
+
+## Demo
+
+[http://nkbt.github.io/react-debounce-input/example](http://nkbt.github.io/react-debounce-input/example)
+
+
+## Usage
+
+```js
+import React from 'react';
+import DebounceInput from 'react-debounce-input';
+
+const App = React.createClass({
+  getInitialState() {
+    return {
+      value: ''
+    };
+  },
+
+  render() {
+    return (
+      <div>
+        <DebounceInput
+          minLength={2}
+          debounceTimeout={300}
+          onChange={value => this.setState({value})} />
+        
+        <p>Value: {this.state.value}</p>
+      </div>
+    );
+  }
+});
+
+
+React.render(<App />, document.body);
+```
+
+
+## Options
+
+
+#### `onChange`: PropTypes.func.isRequired
+
+Function called when value is changed (debounced)
+
+
+#### `value`: PropTypes.string (default: '')
+
+Initial value
+
+
+#### `minLength`: PropTypes.number (default: 2)
+
+Minimal length of text to start notify, if value becomes shorter then `minLength` (after removing some characters), there will be a notification with empty value `''`.
+
+
+#### `debounceTimeout`: PropTypes.number (default: 100)
+
+Notification debounce timeout in ms
+
+
+#### Arbitrary props will be transferred to rendered `<input>`
+
+```js
+<DebounceInput
+  onChange={value => this.setState({value})}
+  placeholder="Name"
+  className="user-name" />
+});
+```
+
+Will result in
+
+```js
+<input type="text"
+  placeholder="Name"
+  className="user-name" />
+});
+```
+
+## Development and testing
+
+```bash
+npm install
+npm start
+```
+
+Then 
+
+```bash
+open http://localhost:8080
+```
+
+## License
+
+MIT
