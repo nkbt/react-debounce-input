@@ -1,0 +1,14 @@
+machine:
+  node:
+    version: v0.10.38
+
+
+dependencies:
+  pre:
+    - npm update -g npm
+
+test:
+  override:
+    - $(npm bin)/eslint . --format tap | $(npm bin)/tap-xunit > $CIRCLE_TEST_REPORTS/lint.xml
+    - COVERAGE=1 karma start ./karma.conf.js --single-run --reporters coverage,junit
+    - cat ${CIRCLE_ARTIFACTS}/coverage/lcov.info | $(npm bin)/coveralls || true
