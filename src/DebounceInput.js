@@ -31,6 +31,13 @@ const DebounceInput = React.createClass({
   shouldComponentUpdate,
 
 
+  componentWillReceiveProps({value}) {
+    if (this.state.value !== value) {
+      this.setState({value});
+    }
+  },
+
+
   componentWillUpdate({minLength, debounceTimeout}, {value}) {
     this.maybeUpdateNotifier(debounceTimeout);
     this.maybeNotify(minLength, value);
