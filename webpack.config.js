@@ -74,7 +74,7 @@ var build = {
   output: {
     filename: require('./package.json').name + '.js',
     path: path.resolve('build'),
-    library: 'Component',
+    library: 'DebounceInput',
     libraryTarget: 'umd'
   },
   plugins: [

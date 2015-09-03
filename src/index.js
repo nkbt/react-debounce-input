@@ -1,4 +1,4 @@
-import Component from './Component';
+import DebounceInput from './DebounceInput';
 
 
-export default Component;
+export default DebounceInput;

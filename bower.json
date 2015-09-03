@@ -1,11 +1,11 @@
 {
-  "name": "react-component-template",
+  "name": "react-debounce-input",
   "version": "1.0.0",
   "description": "React component",
-  "main": "react-component-template.js",
+  "main": "react-debounce-input.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bower-registry/react-component-template.git"
+    "url": "https://github.com/bower-registry/react-debounce-input.git"
   },
   "keywords": [
     "component",
@@ -16,7 +16,7 @@
     "Nik Butenko <nik@butenko.me> (http://butenko.me/)"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/nkbt/react-component-template",
+  "homepage": "https://github.com/nkbt/react-debounce-input",
   "dependencies": {
     "react": "^0.13.3"
   },
