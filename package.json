@@ -25,7 +25,10 @@
   "keywords": [
     "component",
     "react-component",
-    "react"
+    "react",
+    "input",
+    "debounce",
+    "throttle"
   ],
   "author": "Nik Butenko <nik@butenko.me> (http://butenko.me/)",
   "license": "MIT",
@@ -68,5 +71,8 @@
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "dependencies": {
+    "lodash.debounce": "^3.1.1"
+  }
 }
