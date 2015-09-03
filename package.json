@@ -1,7 +1,7 @@
 {
   "name": "react-debounce-input",
-  "version": "1.0.0",
-  "description": "React component",
+  "version": "0.0.0",
+  "description": "React component that renders Input with debounced onChange",
   "main": "lib/index.js",
   "scripts": {
     "build": "npm run build:lib && npm run build:example && npm run build:build",
