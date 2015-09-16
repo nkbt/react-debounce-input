@@ -15,7 +15,6 @@ const DebounceInput = React.createClass({
   getDefaultProps() {
     return {
       minLength: 0,
-      value: '',
       debounceTimeout: 100
     };
   },
@@ -32,7 +31,7 @@ const DebounceInput = React.createClass({
 
 
   componentWillReceiveProps({value}) {
-    if (this.state.value !== value) {
+    if (typeof value !== 'undefined' && this.state.value !== value) {
       this.setState({value});
     }
   },
