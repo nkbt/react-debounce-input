@@ -85,7 +85,7 @@ Minimal length of text to start notify, if value becomes shorter then `minLength
 
 #### `debounceTimeout`: PropTypes.number (default: 100)
 
-Notification debounce timeout in ms
+Notification debounce timeout in ms. If set to `-1`, disables automatic notification completely. Notification will only happen by pressing `Enter` then.
 
 
 #### `forceNotifyByEnter`: PropTypes.boolean (default: true)

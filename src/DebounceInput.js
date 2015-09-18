@@ -52,7 +52,13 @@ const DebounceInput = React.createClass({
 
 
   createNotifier(debounceTimeout) {
-    this.notify = debounce(this.props.onChange, debounceTimeout);
+    if (debounceTimeout < 0) {
+      this.notify = () => {};
+    } else if (debounceTimeout === 0) {
+      this.notify = this.props.onChange;
+    } else {
+      this.notify = debounce(this.props.onChange, debounceTimeout);
+    }
   },
 
 
