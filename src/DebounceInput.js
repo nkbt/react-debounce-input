@@ -6,16 +6,19 @@ import {shouldComponentUpdate} from 'react/lib/ReactComponentWithPureRenderMixin
 const DebounceInput = React.createClass({
   propTypes: {
     onChange: React.PropTypes.func.isRequired,
+    onKeyDown: React.PropTypes.func,
     value: React.PropTypes.string,
     minLength: React.PropTypes.number,
-    debounceTimeout: React.PropTypes.number
+    debounceTimeout: React.PropTypes.number,
+    forceNotifyByEnter: React.PropTypes.boolean
   },
 
 
   getDefaultProps() {
     return {
       minLength: 0,
-      debounceTimeout: 100
+      debounceTimeout: 100,
+      forceNotifyByEnter: true
     };
   },
 
@@ -79,14 +82,40 @@ const DebounceInput = React.createClass({
   },
 
 
+  forceNotify() {
+    const {value} = this.state;
+    const {minLength, onChange} = this.props;
+
+    if (value.length >= minLength) {
+      onChange(value);
+    } else {
+      onChange('');
+    }
+  },
+
+
   render() {
-    const {onChange, value: v, minLength, debounceTimeout, ...props} = this.props;
+    const {onChange, value: v, minLength, debounceTimeout, forceNotifyByEnter,
+      ...props} = this.props;
+    const onKeyDown = !forceNotifyByEnter ? {} : {
+      onKeyDown: (event) => {
+        if (event.key === 'Enter') {
+          this.forceNotify();
+        }
+        // Invoke original onKeyDown if present
+        if (this.props.onKeyDown) {
+          this.props.onKeyDown(event);
+        }
+      }
+    };
+
 
     return (
       <input type="text"
         {...props}
         value={this.state.value}
-        onChange={({target: {value}}) => this.setState({value})} />
+        onChange={({target: {value}}) => this.setState({value})}
+        {...onKeyDown} />
     );
   }
 });
