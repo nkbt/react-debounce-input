@@ -40,8 +40,10 @@ const App = React.createClass({
           <DebounceInput
             minLength={this.state.minLength}
             debounceTimeout={this.state.debounceTimeout}
-            onChange={value => this.setState({value})} />
+            onChange={value => this.setState({value})}
+            onKeyDown={({key}) => this.setState({key})} />
           <p>Value: {this.state.value}</p>
+          <p>Key pressed: {this.state.key}</p>
         </div>
       </div>
     );
