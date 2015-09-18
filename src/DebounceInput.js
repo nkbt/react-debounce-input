@@ -10,7 +10,7 @@ const DebounceInput = React.createClass({
     value: React.PropTypes.string,
     minLength: React.PropTypes.number,
     debounceTimeout: React.PropTypes.number,
-    forceNotifyByEnter: React.PropTypes.boolean
+    forceNotifyByEnter: React.PropTypes.bool
   },
 
 
