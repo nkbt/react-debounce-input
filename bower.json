@@ -10,7 +10,10 @@
   "keywords": [
     "component",
     "react-component",
-    "react"
+    "react",
+    "input",
+    "debounce",
+    "throttle"
   ],
   "authors": [
     "Nik Butenko <nik@butenko.me> (http://butenko.me/)"
