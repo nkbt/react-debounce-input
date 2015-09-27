@@ -30,7 +30,9 @@ const DebounceInput = React.createClass({
   },
 
 
-  shouldComponentUpdate,
+  componentWillMount() {
+    this.createNotifier(this.props.debounceTimeout);
+  },
 
 
   componentWillReceiveProps({value}) {
@@ -40,14 +42,12 @@ const DebounceInput = React.createClass({
   },
 
 
+  shouldComponentUpdate,
+
+
   componentWillUpdate({minLength, debounceTimeout}, {value}) {
     this.maybeUpdateNotifier(debounceTimeout);
     this.maybeNotify(minLength, value);
-  },
-
-
-  componentWillMount() {
-    this.createNotifier(this.props.debounceTimeout);
   },
 
 
@@ -104,7 +104,7 @@ const DebounceInput = React.createClass({
     const {onChange, value: v, minLength, debounceTimeout, forceNotifyByEnter,
       ...props} = this.props;
     const onKeyDown = !forceNotifyByEnter ? {} : {
-      onKeyDown: (event) => {
+      onKeyDown: event => {
         if (event.key === 'Enter') {
           this.forceNotify();
         }
