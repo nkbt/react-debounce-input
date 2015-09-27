@@ -25,13 +25,17 @@ npm install --save react-debounce-input
 
 ### bower
 
-Coming soon
-
+```sh
+bower install --save react-debounce-input
+```
 
 ## Demo
 
 [http://nkbt.github.io/react-debounce-input/example](http://nkbt.github.io/react-debounce-input/example)
 
+## Codepen demo
+
+[http://codepen.io/nkbt/pen/VvmzLQ](http://codepen.io/nkbt/pen/VvmzLQ?editors=101)
 
 ## Usage
 
