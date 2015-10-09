@@ -4,6 +4,8 @@
   "description": "React component that renders Input with debounced onChange",
   "main": "lib/index.js",
   "scripts": {
+    "pregh-pages": "git fetch origin",
+    "gh-pages": "git checkout gh-pages && git rebase origin/master --force-rebase && npm run build && git add . && git commit --amend --no-edit && git push --force && git checkout master",
     "build": "parallelshell -w \"npm run build:lib -s\" \"npm run build:example -s\" \"npm run build:bower -s\"",
     "prebuild": "rimraf lib example build",
     "build:lib": "babel src --out-dir lib --source-maps --ignore src/example",
@@ -48,7 +50,7 @@
   },
   "homepage": "https://github.com/nkbt/react-debounce-input",
   "peerDependencies": {
-    "react": "^0.13 || ~0.14.0-beta || ~0.14.0-rc"
+    "react": "^0.13 || ^0.14"
   },
   "dependencies": {
     "lodash.debounce": "^3.1.1"
@@ -79,6 +81,7 @@
     "node-libs-browser": "^0.5.3",
     "parallelshell": "^2.0.0",
     "phantomjs": "^1.9.18",
+    "react": "^0.14.0",
     "react-hot-loader": "^1.3.0",
     "rimraf": "^2.4.3",
     "tap-xunit": "^1.2.1",
