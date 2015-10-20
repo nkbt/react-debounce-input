@@ -82,7 +82,7 @@ const DebounceInput = React.createClass({
     }
 
     // If user hits backspace and goes below minLength consider it cleaning the value
-    if (value.length < oldValue.length) {
+    if (oldValue && value.length < oldValue.length) {
       this.notify('');
     }
   },
