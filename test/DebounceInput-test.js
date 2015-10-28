@@ -1,19 +1,7 @@
-describe('DebounceInput', () => {
-  const DebounceInputInjector = require('inject!../src/DebounceInput');
-  let mock, DebounceInput;
+import test from 'tape';
+import DebounceInput from '../src/DebounceInput';
 
-
-  beforeEach(() => {
-    mock = jasmine.createSpyObj('mock', ['']);
-  });
-
-
-  beforeEach(() => DebounceInput = DebounceInputInjector({
-    mock
-  }));
-
-
-  it('should be ok', () => {
-    expect(DebounceInput).toBeTruthy();
-  });
+test('DebounceInput', t => {
+  t.ok(DebounceInput instanceof Function, 'should be function');
+  t.end();
 });
