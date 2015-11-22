@@ -23,6 +23,21 @@ const App = React.createClass({
   },
 
 
+  onChangeIndefiniteTimeout({target: {checked}}) {
+    this.setState({indefinite: checked});
+  },
+
+
+  onChange(value) {
+    this.setState({value});
+  },
+
+
+  onKeyDown({key}) {
+    this.setState({key});
+  },
+
+
   render() {
     return (
       <div>
@@ -44,7 +59,7 @@ const App = React.createClass({
             Indefinite timeout:&nbsp;
             <input
               type="checkbox"
-              onChange={({target: {checked}}) => this.setState({indefinite: checked})} />
+              onChange={this.onChangeIndefiniteTimeout} />
           </label>
         </div>
 
@@ -53,8 +68,8 @@ const App = React.createClass({
           <DebounceInput
             minLength={this.state.minLength}
             debounceTimeout={this.state.indefinite ? -1 : this.state.debounceTimeout}
-            onChange={value => this.setState({value})}
-            onKeyDown={({key}) => this.setState({key})} />
+            onChange={this.onChange}
+            onKeyDown={this.onKeyDown} />
           <p>Value: {this.state.value}</p>
           <p>Key pressed: {this.state.key}</p>
         </div>
