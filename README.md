@@ -23,11 +23,34 @@ React component that renders Input with debounced onChange
 npm install --save react-debounce-input
 ```
 
-### bower
 
+### Bower:
 ```sh
-bower install --save react-debounce-input
+bower install --save https://npmcdn.com/react-debounce-input/build/react-debounce-input.js
 ```
+
+or in `bower.json`
+
+```json
+{
+  "dependencies": {
+    "react-motion": "https://npmcdn.com/react-debounce-input/build/react-debounce-input.js"
+  }
+}
+```
+
+then include as
+```html
+<script src="bower_components/react-debounce-input/index.js"></script>
+```
+
+
+### 1998 Script Tag:
+```html
+<script src="https://npmcdn.com/react-debounce-input/build/react-debounce-input.js"></script>
+(Module exposed as `ReactSwap`)
+```
+
 
 ## Demo
 
@@ -57,7 +80,7 @@ const App = React.createClass({
           minLength={2}
           debounceTimeout={300}
           onChange={value => this.setState({value})} />
-        
+
         <p>Value: {this.state.value}</p>
       </div>
     );
@@ -106,7 +129,6 @@ Notification of current value will be sent immediately by hitting `Enter` key. E
   onChange={value => this.setState({value})}
   placeholder="Name"
   className="user-name" />
-});
 ```
 
 Will result in
@@ -115,19 +137,19 @@ Will result in
 <input type="text"
   placeholder="Name"
   className="user-name" />
-});
 ```
 
 ## Development and testing
 
+To run example covering all `ReactDebounceInput` features, use `npm start`, which will compile `src/example/Example.js`
+
 ```bash
+git clone git@github.com:nkbt/react-debounce-input.git
+cd react-debounce-input
 npm install
 npm start
-```
 
-Then 
-
-```bash
+# then
 open http://localhost:8080
 ```
 
