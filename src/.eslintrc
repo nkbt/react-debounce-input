@@ -118,7 +118,7 @@
     "no-param-reassign": 2, // disallow reassignment of function parameters
     "no-process-env": 0, // disallow use of process.env
     "no-proto": 2, // disallow usage of __proto__ property
-    "no-redeclare": 2, // disallow declaring the same variable more than once
+    "no-redeclare": 0, // disallow declaring the same variable more than once // Does not matter since `var` is not allowed anyway
     "no-return-assign": 2, // disallow use of assignment in return statement
     "no-script-url": 2, // disallow use of javascript: urls.
     "no-self-compare": 2, // disallow comparisons where both sides are exactly the same

@@ -53,7 +53,7 @@ const DebounceInput = React.createClass({
 
   createNotifier(debounceTimeout) {
     if (debounceTimeout < 0) {
-      this.notify = () => {};
+      this.notify = () => null;
     } else if (debounceTimeout === 0) {
       this.notify = this.props.onChange;
     } else {
@@ -100,10 +100,15 @@ const DebounceInput = React.createClass({
   },
 
 
+  onChange({target: {value}}) {
+    this.setState({value});
+  },
+
+
   render() {
-    const {onChange, value: v, minLength, debounceTimeout, forceNotifyByEnter,
-      ...props} = this.props;
-    const onKeyDown = !forceNotifyByEnter ? {} : {
+    const {onChange, value: v, minLength,
+      debounceTimeout, forceNotifyByEnter, ...props} = this.props;
+    const onKeyDown = forceNotifyByEnter ? {
       onKeyDown: event => {
         if (event.key === 'Enter') {
           this.forceNotify();
@@ -113,14 +118,13 @@ const DebounceInput = React.createClass({
           this.props.onKeyDown(event);
         }
       }
-    };
-
+    } : {};
 
     return (
       <input type="text"
         {...props}
         value={this.state.value}
-        onChange={({target: {value}}) => this.setState({value})}
+        onChange={this.onChange}
         {...onKeyDown} />
     );
   }
