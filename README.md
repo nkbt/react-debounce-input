@@ -102,7 +102,7 @@ Function called when value is changed (debounced)
 
 #### `value`: PropTypes.string (default: '')
 
-Initial value
+Value displayed by the input box. It will only update the contents if the value changes.
 
 
 #### `minLength`: PropTypes.number (default: 2)

@@ -37,6 +37,10 @@ const App = React.createClass({
     this.setState({key});
   },
 
+  setTextBoxValueToASDF() {
+    this.setState({value: 'ASDF'});
+  },
+
 
   render() {
     return (
@@ -66,12 +70,14 @@ const App = React.createClass({
         <div>
           <h2>Test</h2>
           <DebounceInput
+            value={this.state.value}
             minLength={this.state.minLength}
             debounceTimeout={this.state.indefinite ? -1 : this.state.debounceTimeout}
             onChange={this.onChange}
             onKeyDown={this.onKeyDown} />
           <p>Value: {this.state.value}</p>
           <p>Key pressed: {this.state.key}</p>
+          <button onClick={this.setTextBoxValueToASDF}>Set input to ASDF</button>
         </div>
       </div>
     );
