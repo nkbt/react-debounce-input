@@ -122,6 +122,11 @@ Notification of current value will be sent immediately by hitting `Enter` key. E
 *NOTE* if `onKeyDown` callback prop was present, it will be still invoked transparently.
 
 
+#### `onlyNotifyOnUserInput`: PropTypes.bool (default: false)
+
+Notification of current value will not occur if the props value changes it, it will only occur due to user input.
+
+
 #### Arbitrary props will be transferred to rendered `<input>`
 
 ```js

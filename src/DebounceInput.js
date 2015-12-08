@@ -10,7 +10,8 @@ const DebounceInput = React.createClass({
     value: React.PropTypes.string,
     minLength: React.PropTypes.number,
     debounceTimeout: React.PropTypes.number,
-    forceNotifyByEnter: React.PropTypes.bool
+    forceNotifyByEnter: React.PropTypes.bool,
+    onlyNotifyOnUserInput: React.PropTypes.bool
   },
 
 
@@ -19,6 +20,7 @@ const DebounceInput = React.createClass({
       minLength: 0,
       debounceTimeout: 100,
       forceNotifyByEnter: true,
+      onlyNotifyOnUserInput: false,
       value: ''
     };
   },
@@ -26,6 +28,7 @@ const DebounceInput = React.createClass({
 
   getInitialState() {
     return {
+      isUserInput: false,
       value: this.props.value
     };
   },
@@ -46,9 +49,9 @@ const DebounceInput = React.createClass({
   shouldComponentUpdate,
 
 
-  componentWillUpdate({minLength, debounceTimeout}, {value}) {
+  componentWillUpdate({minLength, debounceTimeout, onlyNotifyOnUserInput}, {value, isUserInput}) {
     this.maybeUpdateNotifier(debounceTimeout);
-    this.maybeNotify(minLength, value);
+    this.maybeNotify(isUserInput, minLength, onlyNotifyOnUserInput, value);
   },
 
 
@@ -70,12 +73,18 @@ const DebounceInput = React.createClass({
   },
 
 
-  maybeNotify(minLength, value) {
+  maybeNotify(isUserInput, minLength, onlyNotifyOnUserInput, value) {
     const {value: oldValue} = this.state;
 
     if (value === oldValue) {
       return;
     }
+
+    if (onlyNotifyOnUserInput && !isUserInput) {
+      return;
+    }
+
+    this.setState({isUserInput: false});
 
     if (value.length >= minLength) {
       this.notify(value);
@@ -102,13 +111,13 @@ const DebounceInput = React.createClass({
 
 
   onChange({target: {value}}) {
-    this.setState({value});
+    this.setState({value, isUserInput: true});
   },
 
 
   render() {
     const {onChange, value: v, minLength,
-      debounceTimeout, forceNotifyByEnter, ...props} = this.props;
+      debounceTimeout, forceNotifyByEnter, onlyNotifyOnUserInput, ...props} = this.props;
     const onKeyDown = forceNotifyByEnter ? {
       onKeyDown: event => {
         if (event.key === 'Enter') {
