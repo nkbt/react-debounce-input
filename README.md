@@ -34,7 +34,7 @@ or in `bower.json`
 ```json
 {
   "dependencies": {
-    "react-motion": "https://npmcdn.com/react-debounce-input/build/react-debounce-input.js"
+    "react-debounce-input": "https://npmcdn.com/react-debounce-input/build/react-debounce-input.js"
   }
 }
 ```
