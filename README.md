@@ -102,7 +102,7 @@ Function called when value is changed (debounced)
 
 #### `value`: PropTypes.string (default: '')
 
-Initial value
+Value displayed by the input box. It will only update the contents if the value changes.
 
 
 #### `minLength`: PropTypes.number (default: 2)
@@ -120,6 +120,11 @@ Notification debounce timeout in ms. If set to `-1`, disables automatic notifica
 Notification of current value will be sent immediately by hitting `Enter` key. Enabled by-default. Notification value follows the same rule as with debounced notification, so if Length is less, then `minLength` - empty value `''` will be sent back.
 
 *NOTE* if `onKeyDown` callback prop was present, it will be still invoked transparently.
+
+
+#### `onlyNotifyOnUserInput`: PropTypes.bool (default: false)
+
+Notification of current value will not occur if the props value changes it, it will only occur due to user input.
 
 
 #### Arbitrary props will be transferred to rendered `<input>`

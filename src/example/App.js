@@ -8,7 +8,11 @@ const App = React.createClass({
       value: '',
       minLength: 0,
       debounceTimeout: 300,
-      indefinite: false
+      indefinite: false,
+      history: [''],
+      historyIndex: 0,
+      lastNotifiedValue: '',
+      onlyNotifyOnUserInput: true
     };
   },
 
@@ -27,14 +31,49 @@ const App = React.createClass({
     this.setState({indefinite: checked});
   },
 
+  onChangeNotifyUserInput({target: {checked}}) {
+    this.setState({onlyNotifyOnUserInput: checked});
+  },
+
 
   onChange(value) {
-    this.setState({value});
+    const historyIndex = this.state.historyIndex + 1;
+
+    this.setState({
+      value,
+      lastNotifiedValue: value,
+      historyIndex,
+      history: this.state.history.slice(0, historyIndex).concat(value)
+    });
   },
 
 
   onKeyDown({key}) {
     this.setState({key});
+  },
+
+  setValueFromHistory(newIndex) {
+    let historyIndex = newIndex;
+
+    if (historyIndex < 0) {
+      historyIndex = 0;
+    } else if (historyIndex >= this.state.history.length) {
+      historyIndex = this.state.history.length - 1;
+    }
+
+    if (historyIndex === 0 && this.state.history.length === 0) {
+      return;
+    }
+
+    this.setState({value: this.state.history[historyIndex], historyIndex});
+  },
+
+  redo() {
+    this.setValueFromHistory(this.state.historyIndex + 1);
+  },
+
+  undo() {
+    this.setValueFromHistory(this.state.historyIndex - 1);
   },
 
 
@@ -61,17 +100,43 @@ const App = React.createClass({
               type="checkbox"
               onChange={this.onChangeIndefiniteTimeout} />
           </label>
+
+          <label>
+            Notifications for User Input Only:&nbsp;
+            <input
+              type="checkbox"
+              checked={this.state.onlyNotifyOnUserInput}
+              onChange={this.onChangeNotifyUserInput} />
+          </label>
         </div>
 
         <div>
           <h2>Test</h2>
           <DebounceInput
+            value={this.state.value}
             minLength={this.state.minLength}
             debounceTimeout={this.state.indefinite ? -1 : this.state.debounceTimeout}
             onChange={this.onChange}
+            onlyNotifyOnUserInput={this.state.onlyNotifyOnUserInput}
             onKeyDown={this.onKeyDown} />
-          <p>Value: {this.state.value}</p>
+          <button onClick={this.undo}>Undo</button>
+          <button onClick={this.redo}>Redo</button>
+          <p>Undo Stack: {
+            this.state.history
+              .map(s => `"${s}"`)
+              .splice(0, this.state.historyIndex)
+              .reverse()
+              .join(', ')}
+          </p>
+          <p>Current Value: {this.state.value}</p>
+          <p>Redo Stack: {
+            this.state.history
+              .map(s => `"${s}"`)
+              .splice(this.state.historyIndex + 1)
+              .join(', ')}
+          </p>
           <p>Key pressed: {this.state.key}</p>
+          <p>Last Change Notification Value: {this.state.lastNotifiedValue}</p>
         </div>
       </div>
     );
