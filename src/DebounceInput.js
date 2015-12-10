@@ -48,6 +48,13 @@ const DebounceInput = React.createClass({
   shouldComponentUpdate,
 
 
+  componentWillUnmount() {
+    if (this.notify.cancel) {
+      this.notify.cancel();
+    }
+  },
+
+
   createNotifier(debounceTimeout) {
     if (debounceTimeout < 0) {
       this.notify = () => null;
