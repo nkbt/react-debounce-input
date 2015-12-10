@@ -17,7 +17,7 @@ React component that renders Input with debounced onChange
 
 ## Installation
 
-### npm
+### NPM
 
 ```sh
 npm install --save react-debounce-input
@@ -48,7 +48,7 @@ then include as
 ### 1998 Script Tag:
 ```html
 <script src="https://npmcdn.com/react-debounce-input/build/react-debounce-input.js"></script>
-(Module exposed as `ReactSwap`)
+(Module exposed as `DebounceInput`)
 ```
 
 
@@ -64,6 +64,7 @@ then include as
 
 ```js
 import React from 'react';
+import ReactDOM from 'react-dom';
 import DebounceInput from 'react-debounce-input';
 
 const App = React.createClass({
@@ -87,10 +88,10 @@ const App = React.createClass({
   }
 });
 
-
-React.render(<App />, document.body);
+const appRoot = document.createElement('div');
+document.body.appendChild(appRoot);
+ReactDOM.render(<App />, appRoot);
 ```
-
 
 ## Options
 
@@ -141,7 +142,7 @@ Will result in
 
 ## Development and testing
 
-To run example covering all `ReactDebounceInput` features, use `npm start`, which will compile `src/example/Example.js`
+To run example covering all `DebounceInput` features, use `npm start`, which will compile `src/example/Example.js`
 
 ```bash
 git clone git@github.com:nkbt/react-debounce-input.git
@@ -151,6 +152,18 @@ npm start
 
 # then
 open http://localhost:8080
+```
+
+## Tests
+
+```bash
+npm test
+
+# to run tests in watch mode for development
+npm run test:dev
+
+# to generate test coverage (./reports/coverage)
+npm run test:cov
 ```
 
 ## License
