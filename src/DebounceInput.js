@@ -83,6 +83,10 @@ const DebounceInput = React.createClass({
     } else {
       onChange('');
     }
+
+    if (this.notify.cancel) {
+      this.notify.cancel();
+    }
   },
 
 
