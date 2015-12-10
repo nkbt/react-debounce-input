@@ -10,8 +10,7 @@ const DebounceInput = React.createClass({
     value: React.PropTypes.string,
     minLength: React.PropTypes.number,
     debounceTimeout: React.PropTypes.number,
-    forceNotifyByEnter: React.PropTypes.bool,
-    onlyNotifyOnUserInput: React.PropTypes.bool
+    forceNotifyByEnter: React.PropTypes.bool
   },
 
 
@@ -19,17 +18,14 @@ const DebounceInput = React.createClass({
     return {
       minLength: 0,
       debounceTimeout: 100,
-      forceNotifyByEnter: true,
-      onlyNotifyOnUserInput: false,
-      value: ''
+      forceNotifyByEnter: true
     };
   },
 
 
   getInitialState() {
     return {
-      isUserInput: false,
-      value: this.props.value
+      value: this.props.value || ''
     };
   },
 
@@ -39,20 +35,17 @@ const DebounceInput = React.createClass({
   },
 
 
-  componentWillReceiveProps({value}) {
-    if (typeof value !== 'undefined' && this.props.value !== value) {
+  componentWillReceiveProps({value, debounceTimeout}) {
+    if (typeof value !== 'undefined' && this.state.value !== value) {
       this.setState({value});
+    }
+    if (debounceTimeout !== this.props.debounceTimeout) {
+      this.createNotifier(debounceTimeout);
     }
   },
 
 
   shouldComponentUpdate,
-
-
-  componentWillUpdate({minLength, debounceTimeout, onlyNotifyOnUserInput}, {value, isUserInput}) {
-    this.maybeUpdateNotifier(debounceTimeout);
-    this.maybeNotify(isUserInput, minLength, onlyNotifyOnUserInput, value);
-  },
 
 
   createNotifier(debounceTimeout) {
@@ -66,33 +59,16 @@ const DebounceInput = React.createClass({
   },
 
 
-  maybeUpdateNotifier(debounceTimeout) {
-    if (debounceTimeout !== this.props.debounceTimeout) {
-      this.createNotifier(debounceTimeout);
-    }
-  },
+  maybeNotify(oldValue) {
+    const {value} = this.state;
 
-
-  maybeNotify(isUserInput, minLength, onlyNotifyOnUserInput, value) {
-    const {value: oldValue} = this.state;
-
-    if (value === oldValue) {
-      return;
-    }
-
-    if (onlyNotifyOnUserInput && !isUserInput) {
-      return;
-    }
-
-    this.setState({isUserInput: false});
-
-    if (value.length >= minLength) {
+    if (value.length >= this.props.minLength) {
       this.notify(value);
       return;
     }
 
     // If user hits backspace and goes below minLength consider it cleaning the value
-    if (oldValue && value.length < oldValue.length) {
+    if (oldValue.length > value.length) {
       this.notify('');
     }
   },
@@ -107,17 +83,23 @@ const DebounceInput = React.createClass({
     } else {
       onChange('');
     }
+
+    if (this.notify.cancel) {
+      this.notify.cancel();
+    }
   },
 
 
   onChange({target: {value}}) {
-    this.setState({value, isUserInput: true});
+    const oldValue = this.state.value;
+
+    this.setState({value}, () => this.maybeNotify(oldValue));
   },
 
 
   render() {
     const {onChange, value: v, minLength,
-      debounceTimeout, forceNotifyByEnter, onlyNotifyOnUserInput, ...props} = this.props;
+      debounceTimeout, forceNotifyByEnter, ...props} = this.props;
     const onKeyDown = forceNotifyByEnter ? {
       onKeyDown: event => {
         if (event.key === 'Enter') {
