@@ -15,7 +15,7 @@ const UndoRedo = React.createClass({
   },
 
 
-  onChange(value) {
+  onChange({target: {value}}) {
     const {historyIndex, history} = this.state;
 
     this.setState({

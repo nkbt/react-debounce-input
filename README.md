@@ -9,6 +9,7 @@
 [![devDependency Status](https://david-dm.org/nkbt/react-debounce-input/dev-status.svg)](https://david-dm.org/nkbt/react-debounce-input#info=devDependencies)
 
 React component that renders Input with debounced onChange
+Can be used as drop-in replacement for `<input type="text" />`
 
 
 
@@ -80,7 +81,7 @@ const App = React.createClass({
         <DebounceInput
           minLength={2}
           debounceTimeout={300}
-          onChange={value => this.setState({value})} />
+          onChange={event => this.setState({value: event.target.value})} />
 
         <p>Value: {this.state.value}</p>
       </div>
@@ -98,7 +99,7 @@ ReactDOM.render(<App />, appRoot);
 
 #### `onChange`: PropTypes.func.isRequired
 
-Function called when value is changed (debounced)
+Function called when value is changed (debounced) with original event passed through
 
 
 #### `value`: PropTypes.string
@@ -127,7 +128,7 @@ Notification of current value will be sent immediately by hitting `Enter` key. E
 
 ```js
 <DebounceInput
-  onChange={value => this.setState({value})}
+  onChange={event => this.setState({value: event.target.value})}
   placeholder="Name"
   className="user-name" />
 ```
