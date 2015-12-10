@@ -66,41 +66,40 @@ const DebounceInput = React.createClass({
   },
 
 
-  maybeNotify(oldValue) {
-    const {value} = this.state;
-
-    if (value.length >= this.props.minLength) {
-      this.notify(value);
-      return;
+  forceNotify(event) {
+    if (this.notify.cancel) {
+      this.notify.cancel();
     }
 
-    // If user hits backspace and goes below minLength consider it cleaning the value
-    if (oldValue.length > value.length) {
-      this.notify('');
-    }
-  },
-
-
-  forceNotify() {
     const {value} = this.state;
     const {minLength, onChange} = this.props;
 
     if (value.length >= minLength) {
-      onChange(value);
+      onChange(event);
     } else {
-      onChange('');
-    }
-
-    if (this.notify.cancel) {
-      this.notify.cancel();
+      onChange({...event, target: {...event.target, value}});
     }
   },
 
 
-  onChange({target: {value}}) {
+  onChange(event) {
+    event.persist();
+
     const oldValue = this.state.value;
 
-    this.setState({value}, () => this.maybeNotify(oldValue));
+    this.setState({value: event.target.value}, () => {
+      const {value} = this.state;
+
+      if (value.length >= this.props.minLength) {
+        this.notify(event);
+        return;
+      }
+
+      // If user hits backspace and goes below minLength consider it cleaning the value
+      if (oldValue.length > value.length) {
+        this.notify({...event, target: {...event.target, value}});
+      }
+    });
   },
 
 
@@ -110,7 +109,7 @@ const DebounceInput = React.createClass({
     const onKeyDown = forceNotifyByEnter ? {
       onKeyDown: event => {
         if (event.key === 'Enter') {
-          this.forceNotify();
+          this.forceNotify(event);
         }
         // Invoke original onKeyDown if present
         if (this.props.onKeyDown) {

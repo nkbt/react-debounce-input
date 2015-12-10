@@ -11,8 +11,8 @@ const Controllable = React.createClass({
   },
 
 
-  onChangeDebounced(debouncedValue) {
-    this.setState({debouncedValue, value: debouncedValue});
+  onChangeDebounced({target: {value}}) {
+    this.setState({debouncedValue: value, value});
   },
 
 

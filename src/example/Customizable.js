@@ -34,7 +34,7 @@ const Customizable = React.createClass({
   },
 
 
-  onChange(value) {
+  onChange({target: {value}}) {
     this.setState({value});
   },
 
@@ -50,13 +50,13 @@ const Customizable = React.createClass({
         <h2>Customizable</h2>
         <label>
           Min length:&nbsp;
-          <input type="number" step={1} min={0} max={10}
+          <input type="range" step={1} min={0} max={10}
             value={this.state.minLength} onChange={this.onChangeMaxLength} />&nbsp;
         </label>&nbsp;
 
         <label>
           Debounce timeout:&nbsp;
-          <input disabled={this.state.indefinite} type="number" step={100} min={0} max={1000}
+          <input disabled={this.state.indefinite} type="range" step={100} min={0} max={1000}
             value={this.state.debounceTimeout} onChange={this.onChangeDebounceTimeout} />&nbsp;
         </label>&nbsp;
 

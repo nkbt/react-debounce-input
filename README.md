@@ -81,7 +81,7 @@ const App = React.createClass({
         <DebounceInput
           minLength={2}
           debounceTimeout={300}
-          onChange={value => this.setState({value})} />
+          onChange={event => this.setState({value: event.target.value})} />
 
         <p>Value: {this.state.value}</p>
       </div>
