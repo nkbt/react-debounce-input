@@ -4,13 +4,13 @@
 process.env.NODE_ENV = 'development';
 
 
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'cheap-module-eval-source-map',
 
   entry: [
     './src/example/Example.js',
@@ -29,10 +29,10 @@ module.exports = {
   ],
   module: {
     loaders: [
-      {test: /\.js$/, loaders: ['react-hot', 'babel'], include: [path.resolve('src')]}
+      {test: /\.js$/, loader: 'babel', include: [path.resolve('src')]}
     ],
     preLoaders: [
-      {test: /\.js$/, loaders: ['eslint'], include: [path.resolve('src')]}
+      {test: /\.js$/, loader: 'eslint', include: [path.resolve('src')]}
     ]
   },
   resolve: {extensions: ['', '.js']},
