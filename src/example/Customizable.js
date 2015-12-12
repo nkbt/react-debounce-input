@@ -19,7 +19,7 @@ const Customizable = React.createClass({
   },
 
 
-  onChangeMaxLength({target: {value}}) {
+  onChangeMinLength({target: {value}}) {
     this.setState({minLength: parseInt(value, 10)});
   },
 
@@ -45,26 +45,28 @@ const Customizable = React.createClass({
 
 
   render() {
+    const {minLength, indefinite, debounceTimeout, forceNotifyByEnter, value, key} = this.state;
+
     return (
       <div>
         <h2>Customizable</h2>
         <label>
-          Min length:&nbsp;
+          Min length [{minLength}]:&nbsp;
           <input type="range" step={1} min={0} max={10}
-            value={this.state.minLength} onChange={this.onChangeMaxLength} />&nbsp;
+            value={minLength} onChange={this.onChangeMinLength} />&nbsp;
         </label>&nbsp;
 
         <label>
-          Debounce timeout:&nbsp;
-          <input disabled={this.state.indefinite} type="range" step={100} min={0} max={1000}
-            value={this.state.debounceTimeout} onChange={this.onChangeDebounceTimeout} />&nbsp;
+          Debounce timeout [{debounceTimeout}ms]:&nbsp;
+          <input disabled={indefinite} type="range" step={100} min={0} max={1000}
+            value={debounceTimeout} onChange={this.onChangeDebounceTimeout} />&nbsp;
         </label>&nbsp;
 
         <label>
           Indefinite timeout:&nbsp;
           <input
             type="checkbox"
-            checked={this.state.indefinite}
+            checked={indefinite}
             onChange={this.onChangeIndefiniteTimeout} />
         </label>&nbsp;
 
@@ -72,19 +74,19 @@ const Customizable = React.createClass({
           Force notify by "Enter":&nbsp;
           <input
             type="checkbox"
-            checked={this.state.forceNotifyByEnter}
+            checked={forceNotifyByEnter}
             onChange={this.onChangeForceByEnter} />
         </label>
 
         <h3>Test</h3>
         <DebounceInput
-          forceNotifyByEnter={this.state.forceNotifyByEnter}
-          minLength={this.state.minLength}
-          debounceTimeout={this.state.indefinite ? -1 : this.state.debounceTimeout}
+          forceNotifyByEnter={forceNotifyByEnter}
+          minLength={minLength}
+          debounceTimeout={indefinite ? -1 : debounceTimeout}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown} />
-        <p>Value: {this.state.value}</p>
-        <p>Key pressed: {this.state.key}</p>
+        <p>Value: {value}</p>
+        <p>Key pressed: {key}</p>
       </div>
 
     );
