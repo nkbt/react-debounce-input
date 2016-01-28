@@ -123,6 +123,12 @@ Notification of current value will be sent immediately by hitting `Enter` key. E
 
 *NOTE* if `onKeyDown` callback prop was present, it will be still invoked transparently.
 
+#### `forceNotifyOnBlur`: PropTypes.bool (default: true)
+
+Notification of current value will be sent immediately when focus leaves the input field. Enabled by-default. Notification value follows the same rule as with debounced notification, so if Length is less, then `minLength` - empty value `''` will be sent back.
+
+*NOTE* if `onBlur` prop was present, it will be still invoked transparently.
+
 
 #### Arbitrary props will be transferred to rendered `<input>`
 
