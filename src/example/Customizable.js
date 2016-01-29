@@ -1,5 +1,6 @@
 import React from 'react';
 import DebounceInput from '../DebounceInput';
+import * as style from './style';
 
 
 const Customizable = React.createClass({
@@ -8,83 +9,78 @@ const Customizable = React.createClass({
       value: '',
       minLength: 0,
       debounceTimeout: 500,
-      indefinite: false,
-      forceNotifyByEnter: true
+      infinite: false,
+      forceNotifyByEnter: true,
+      forceNotifyOnBlur: true
     };
   },
 
 
-  onChangeDebounceTimeout({target: {value}}) {
-    this.setState({debounceTimeout: parseInt(value, 10)});
-  },
-
-
-  onChangeMinLength({target: {value}}) {
-    this.setState({minLength: parseInt(value, 10)});
-  },
-
-
-  onChangeIndefiniteTimeout({target: {checked}}) {
-    this.setState({indefinite: checked});
-  },
-
-
-  onChangeForceByEnter({target: {checked}}) {
-    this.setState({forceNotifyByEnter: checked});
-  },
-
-
-  onChange({target: {value}}) {
-    this.setState({value});
-  },
-
-
-  onKeyDown({key}) {
-    this.setState({key});
-  },
-
-
   render() {
-    const {minLength, indefinite, debounceTimeout, forceNotifyByEnter, value, key} = this.state;
+    const {minLength, infinite, debounceTimeout,
+      forceNotifyByEnter, forceNotifyOnBlur,
+      value, key} = this.state;
 
     return (
       <div>
-        <h2>Customizable</h2>
-        <label>
-          Min length [{minLength}]:&nbsp;
-          <input type="range" step={1} min={0} max={10}
-            value={minLength} onChange={this.onChangeMinLength} />&nbsp;
-        </label>&nbsp;
+        <div style={style.config}>
+          <label style={style.label}>
+            Min length:
+            <input style={style.input}
+              type="range"
+              value={minLength} step={1} min={0} max={10}
+              onChange={e => this.setState({minLength: parseInt(e.target.value, 10)})} />
+            {minLength}
+          </label>
 
-        <label>
-          Debounce timeout [{debounceTimeout}ms]:&nbsp;
-          <input disabled={indefinite} type="range" step={100} min={0} max={1000}
-            value={debounceTimeout} onChange={this.onChangeDebounceTimeout} />&nbsp;
-        </label>&nbsp;
+          <label style={style.label}>
+            Debounce timeout:
+            <input style={style.input}
+              type="range"
+              disabled={infinite}
+              value={debounceTimeout} step={100} min={0} max={2000}
+              onChange={e => this.setState({debounceTimeout: parseInt(e.target.value, 10)})} />
+            {debounceTimeout}
+          </label>
 
-        <label>
-          Indefinite timeout:&nbsp;
-          <input
-            type="checkbox"
-            checked={indefinite}
-            onChange={this.onChangeIndefiniteTimeout} />
-        </label>&nbsp;
+          <label style={style.label}>
+            Infinite timeout:
+            <input style={style.input}
+              type="checkbox"
+              checked={infinite}
+              onChange={e => this.setState({infinite: e.target.checked})} />
+          </label>
+        </div>
 
-        <label>
-          Force notify by "Enter":&nbsp;
-          <input
-            type="checkbox"
-            checked={forceNotifyByEnter}
-            onChange={this.onChangeForceByEnter} />
-        </label>
+        <div style={style.config}>
+          <label style={style.label}>
+            Notify by:
+          </label>
 
-        <h3>Test</h3>
+          <label style={style.label}>
+            "Enter" keypress:
+            <input style={style.input}
+              type="checkbox"
+              checked={forceNotifyByEnter}
+              onChange={e => this.setState({forceNotifyByEnter: e.target.checked})} />
+          </label>
+
+          <label style={style.label}>
+            Blur:
+            <input style={style.input}
+              type="checkbox"
+              checked={forceNotifyOnBlur}
+              onChange={e => this.setState({forceNotifyOnBlur: e.target.checked})} />
+          </label>
+        </div>
+
         <DebounceInput
           forceNotifyByEnter={forceNotifyByEnter}
+          forceNotifyOnBlur={forceNotifyOnBlur}
           minLength={minLength}
-          debounceTimeout={indefinite ? -1 : debounceTimeout}
-          onChange={this.onChange}
-          onKeyDown={this.onKeyDown} />
+          debounceTimeout={infinite ? -1 : debounceTimeout}
+          onChange={e => this.setState({value: e.target.value})}
+          onKeyDown={e => this.setState({key: e.key})} />
         <p>Value: {value}</p>
         <p>Key pressed: {key}</p>
       </div>
