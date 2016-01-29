@@ -1,5 +1,6 @@
 import React from 'react';
 import DebounceInput from '../DebounceInput';
+import * as style from './style';
 
 
 const Controllable = React.createClass({
@@ -11,30 +12,34 @@ const Controllable = React.createClass({
   },
 
 
-  onChangeDebounced({target: {value}}) {
-    this.setState({debouncedValue: value, value});
-  },
-
-
-  onChange({target: {value}}) {
-    this.setState({value});
-  },
-
-
   render() {
+    const {value, debouncedValue} = this.state;
+
     return (
       <div>
-        Contollable input
-        <input type="text" value={this.state.value} onChange={this.onChange} />
-        <p>Value: {this.state.value}</p>
+        <div style={style.config}>
+          <label style={style.label}>
+            Contollable input:
+            <input style={style.input}
+              type="text"
+              value={value}
+              onChange={e => this.setState({value: e.target.value})} />
+            {value}
+          </label>
+        </div>
 
-        Debounced input
-        <DebounceInput
-          value={this.state.value}
-          minLength={2}
-          debounceTimeout={500}
-          onChange={this.onChangeDebounced} />
-        <p>Debounced Value: {this.state.debouncedValue}</p>
+        <div style={style.config}>
+          <label style={style.label}>
+            Debounced input:
+            <DebounceInput style={style.input}
+              value={value}
+              minLength={2}
+              debounceTimeout={500}
+              onChange={e =>
+                this.setState({value: e.target.value, debouncedValue: e.target.value})} />
+            {debouncedValue}
+          </label>
+        </div>
       </div>
     );
   }

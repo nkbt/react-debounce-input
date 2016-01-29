@@ -37,6 +37,7 @@ const Customizable = React.createClass({
             Debounce timeout:
             <input style={style.input}
               type="range"
+              disabled={infinite}
               value={debounceTimeout} step={100} min={0} max={2000}
               onChange={e => this.setState({debounceTimeout: parseInt(e.target.value, 10)})} />
             {debounceTimeout}
@@ -49,10 +50,9 @@ const Customizable = React.createClass({
               checked={infinite}
               onChange={e => this.setState({infinite: e.target.checked})} />
           </label>
+        </div>
 
-          <br />
-          <br />
-
+        <div style={style.config}>
           <label style={style.label}>
             Notify by:
           </label>

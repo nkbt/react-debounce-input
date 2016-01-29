@@ -1,5 +1,6 @@
 import React from 'react';
 import DebounceInput from '../DebounceInput';
+import * as style from './style';
 
 
 const item = {marginRight: 10};
@@ -57,15 +58,27 @@ const UndoRedo = React.createClass({
 
     return (
       <div>
-        <DebounceInput
-          value={this.state.value}
-          minLength={2}
-          debounceTimeout={500}
-          onChange={this.onChange} />
-        <p>Current Value: {this.state.value}</p>
+        <div style={style.config}>
+          <label style={style.label}>
+            Debounced Input:
+            <DebounceInput style={style.input}
+              value={this.state.value}
+              minLength={2}
+              debounceTimeout={500}
+              forceNotifyOnBlur={false}
+              onChange={this.onChange} />
+          </label>
 
-        <button onClick={this.undo}>Undo</button>
-        <button onClick={this.redo}>Redo</button>
+          <label style={style.label}>
+            <button style={style.input} onClick={this.undo}>Undo</button>
+          </label>
+
+          <label style={style.label}>
+            <button style={style.input} onClick={this.redo}>Redo</button>
+          </label>
+        </div>
+
+        <p>Current Value: {this.state.value}</p>
         <p>History: {history}</p>
         <p>History Index: {this.state.historyIndex}</p>
       </div>
