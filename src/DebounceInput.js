@@ -107,8 +107,10 @@ const DebounceInput = React.createClass({
 
 
   render() {
-    const {onChange, value: v, minLength,
-      debounceTimeout, forceNotifyByEnter, forceNotifyOnBlur, onBlur, ...props} = this.props;
+    const {onChange, value: v, minLength, debounceTimeout,
+      forceNotifyByEnter, forceNotifyOnBlur,
+      ...props} = this.props;
+
     const onKeyDown = forceNotifyByEnter ? {
       onKeyDown: event => {
         if (event.key === 'Enter') {
@@ -121,20 +123,23 @@ const DebounceInput = React.createClass({
       }
     } : {};
 
-    const wrappedOnBlur = event => {
-      this.forceNotify(event);
-      if (onBlur) {
-        onBlur(event);
+    const onBlur = forceNotifyOnBlur ? {
+      onBlur: event => {
+        this.forceNotify(event);
+        // Invoke original onBlur if present
+        if (this.props.onBlur) {
+          this.props.onBlur(event);
+        }
       }
-    };
+    } : {};
 
     return (
       <input type="text"
         {...props}
         value={this.state.value}
         onChange={this.onChange}
-        onBlur={forceNotifyOnBlur ? wrappedOnBlur : onBlur}
-        {...onKeyDown} />
+        {...onKeyDown}
+        {...onBlur} />
     );
   }
 });
