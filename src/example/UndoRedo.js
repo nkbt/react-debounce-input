@@ -57,7 +57,6 @@ const UndoRedo = React.createClass({
 
     return (
       <div>
-        <h2>Undo-Redo</h2>
         <DebounceInput
           value={this.state.value}
           minLength={2}

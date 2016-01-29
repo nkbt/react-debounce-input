@@ -24,8 +24,6 @@ const Controllable = React.createClass({
   render() {
     return (
       <div>
-        <h2>Controllable</h2>
-
         Contollable input
         <input type="text" value={this.state.value} onChange={this.onChange} />
         <p>Value: {this.state.value}</p>

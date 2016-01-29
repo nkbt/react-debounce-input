@@ -2,24 +2,27 @@ import React from 'react';
 import Controllable from './Controllable';
 import Customizable from './Customizable';
 import UndoRedo from './UndoRedo';
+import * as style from './style';
 
-const section = {marginBottom: 40};
 
 const App = React.createClass({
   render() {
     return (
-      <div>
+      <div style={style.container}>
         <h1>DebounceInput</h1>
 
-        <section style={section}>
+        <section style={style.section}>
+          <h2>Example 1. Customizable</h2>
           <Customizable />
         </section>
 
-        <section style={section}>
+        <section style={style.section}>
+          <h2>Example 2. Controllabe</h2>
           <Controllable />
         </section>
 
-        <section style={section}>
+        <section style={style.section}>
+          <h2>Example 3. Undo-Redo</h2>
           <UndoRedo />
         </section>
       </div>
