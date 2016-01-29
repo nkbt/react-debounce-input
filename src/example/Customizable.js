@@ -11,14 +11,14 @@ const Customizable = React.createClass({
       debounceTimeout: 500,
       infinite: false,
       forceNotifyByEnter: true,
-      forceNotifyByBlur: true
+      forceNotifyOnBlur: true
     };
   },
 
 
   render() {
     const {minLength, infinite, debounceTimeout,
-      forceNotifyByEnter, forceNotifyByBlur,
+      forceNotifyByEnter, forceNotifyOnBlur,
       value, key} = this.state;
 
     return (
@@ -69,14 +69,14 @@ const Customizable = React.createClass({
             Blur:
             <input style={style.input}
               type="checkbox"
-              checked={forceNotifyByBlur}
-              onChange={e => this.setState({forceNotifyByBlur: e.target.checked})} />
+              checked={forceNotifyOnBlur}
+              onChange={e => this.setState({forceNotifyOnBlur: e.target.checked})} />
           </label>
         </div>
 
         <DebounceInput
           forceNotifyByEnter={forceNotifyByEnter}
-          forceNotifyByBlur={forceNotifyByBlur}
+          forceNotifyOnBlur={forceNotifyOnBlur}
           minLength={minLength}
           debounceTimeout={infinite ? -1 : debounceTimeout}
           onChange={e => this.setState({value: e.target.value})}
