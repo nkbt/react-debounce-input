@@ -3,8 +3,9 @@
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nkbt/help)
 
-[![Circle CI](https://circleci.com/gh/nkbt/react-debounce-input.svg?style=svg)](https://circleci.com/gh/nkbt/react-debounce-input)
-[![Coverage Status](https://coveralls.io/repos/nkbt/react-debounce-input/badge.svg?branch=master)](https://coveralls.io/r/nkbt/react-debounce-input?branch=master)
+[![Circle CI](https://circleci.com/gh/nkbt/react-debounce-input.svg?style=shield)](https://circleci.com/gh/nkbt/react-debounce-input)
+[![Appveyor](https://ci.appveyor.com/api/projects/status/mql8v50s8ghr0w1q?svg=true)](https://ci.appveyor.com/project/nkbt/react-debounce-input)
+[![codecov.io](https://codecov.io/github/nkbt/react-debounce-input/coverage.svg?branch=master)](https://codecov.io/github/nkbt/react-debounce-input?branch=master)
 [![Dependency Status](https://david-dm.org/nkbt/react-debounce-input.svg)](https://david-dm.org/nkbt/react-debounce-input)
 [![devDependency Status](https://david-dm.org/nkbt/react-debounce-input/dev-status.svg)](https://david-dm.org/nkbt/react-debounce-input#info=devDependencies)
 
@@ -21,13 +22,15 @@ Can be used as drop-in replacement for `<input type="text" />`
 ### NPM
 
 ```sh
-npm install --save react-debounce-input
+npm install --save react react-debounce-input
 ```
+
+Don't forget to manually install peer dependencies (`react`) if you use npm@3.
 
 
 ### Bower:
 ```sh
-bower install --save https://npmcdn.com/react-debounce-input/build/react-debounce-input.js
+bower install --save https://npmcdn.com/react-debounce-input/bower.zip
 ```
 
 or in `bower.json`
@@ -35,19 +38,21 @@ or in `bower.json`
 ```json
 {
   "dependencies": {
-    "react-debounce-input": "https://npmcdn.com/react-debounce-input/build/react-debounce-input.js"
+    "react-debounce-input": "https://npmcdn.com/react-debounce-input/bower.zip"
   }
 }
 ```
 
 then include as
 ```html
-<script src="bower_components/react-debounce-input/index.js"></script>
+<script src="bower_components/react/react.js"></script>
+<script src="bower_components/react-debounce-input/build/react-debounce-input.js"></script>
 ```
 
 
 ### 1998 Script Tag:
 ```html
+<script src="https://npmcdn.com/react/dist/react.js"></script>
 <script src="https://npmcdn.com/react-debounce-input/build/react-debounce-input.js"></script>
 (Module exposed as `DebounceInput`)
 ```
@@ -145,6 +150,9 @@ Will result in
 ```
 
 ## Development and testing
+
+Currently is being developed and tested with the latest stable `Node 5` on `OSX` and `Windows`.
+Should be ok with Node 4, but not guaranteed.
 
 To run example covering all `DebounceInput` features, use `npm start`, which will compile `src/example/Example.js`
 

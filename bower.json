@@ -1,11 +1,16 @@
 {
   "name": "react-debounce-input",
-  "version": "1.0.0",
-  "description": "React component",
-  "main": "react-debounce-input.js",
+  "version": "0.0.0",
+  "description": "React component that renders Input with debounced onChange",
+  "main": [
+    "build/react-debounce-input.js",
+    "build/react-debounce-input.js.map",
+    "build/react-debounce-input.min.js",
+    "build/react-debounce-input.min.js.map"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bower-registry/react-debounce-input.git"
+    "url": "https://github.com/nkbt/react-debounce-input.git"
   },
   "keywords": [
     "component",
@@ -21,7 +26,7 @@
   "license": "MIT",
   "homepage": "https://github.com/nkbt/react-debounce-input",
   "dependencies": {
-    "react": "^0.13 || ^0.14"
+    "react": "^0.14"
   },
   "ignore": [
     "**/.*",
