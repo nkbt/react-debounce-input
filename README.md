@@ -4,7 +4,7 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nkbt/help)
 
 [![Circle CI](https://circleci.com/gh/nkbt/react-debounce-input.svg?style=shield)](https://circleci.com/gh/nkbt/react-debounce-input)
-[![Appveyor](https://ci.appveyor.com/api/projects/status/mql8v50s8ghr0w1q?svg=true)](https://ci.appveyor.com/project/nkbt/react-debounce-input)
+[![Appveyor](https://ci.appveyor.com/api/projects/status/33lfuqqyruouwqku?svg=true)](https://ci.appveyor.com/project/nkbt/react-debounce-input)
 [![codecov.io](https://codecov.io/github/nkbt/react-debounce-input/coverage.svg?branch=master)](https://codecov.io/github/nkbt/react-debounce-input?branch=master)
 [![Dependency Status](https://david-dm.org/nkbt/react-debounce-input.svg)](https://david-dm.org/nkbt/react-debounce-input)
 [![devDependency Status](https://david-dm.org/nkbt/react-debounce-input/dev-status.svg)](https://david-dm.org/nkbt/react-debounce-input#info=devDependencies)
