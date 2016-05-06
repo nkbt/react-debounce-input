@@ -1,6 +1,6 @@
 import React from 'react';
-import DebounceInput from '../DebounceInput';
-import * as style from './style';
+import DebounceInput from '../../DebounceInput';
+import css from './App.css';
 
 
 const Controllable = React.createClass({
@@ -17,10 +17,10 @@ const Controllable = React.createClass({
 
     return (
       <div>
-        <div style={style.config}>
-          <label style={style.label}>
+        <div className={css.config}>
+          <label className={css.label}>
             Contollable input:
-            <input style={style.input}
+            <input className={css.input}
               type="text"
               value={value}
               onChange={e => this.setState({value: e.target.value})} />
@@ -28,10 +28,10 @@ const Controllable = React.createClass({
           </label>
         </div>
 
-        <div style={style.config}>
-          <label style={style.label}>
+        <div className={css.config}>
+          <label className={css.label}>
             Debounced input:
-            <DebounceInput style={style.input}
+            <DebounceInput className={css.input}
               value={value}
               minLength={2}
               debounceTimeout={500}

@@ -107,9 +107,15 @@ const DebounceInput = React.createClass({
 
 
   render() {
-    const {onChange, value: v, minLength, debounceTimeout,
-      forceNotifyByEnter, forceNotifyOnBlur,
-      ...props} = this.props;
+    const {
+      onChange: _onChange,
+      value: _value,
+      minLength: _minLength,
+      debounceTimeout: _debounceTimeout,
+      forceNotifyByEnter,
+      forceNotifyOnBlur,
+      ...props
+    } = this.props;
 
     const onKeyDown = forceNotifyByEnter ? {
       onKeyDown: event => {
