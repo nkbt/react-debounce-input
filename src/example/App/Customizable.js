@@ -1,6 +1,6 @@
 import React from 'react';
-import DebounceInput from '../DebounceInput';
-import * as style from './style';
+import DebounceInput from '../../DebounceInput';
+import css from './App.css';
 
 
 const Customizable = React.createClass({
@@ -17,25 +17,27 @@ const Customizable = React.createClass({
 
 
   render() {
-    const {minLength, infinite, debounceTimeout,
+    const {
+      minLength, infinite, debounceTimeout,
       forceNotifyByEnter, forceNotifyOnBlur,
-      value, key} = this.state;
+      value, key
+    } = this.state;
 
     return (
       <div>
-        <div style={style.config}>
-          <label style={style.label}>
+        <div className={css.config}>
+          <label className={css.label}>
             Min length:
-            <input style={style.input}
+            <input className={css.input}
               type="range"
               value={minLength} step={1} min={0} max={10}
               onChange={e => this.setState({minLength: parseInt(e.target.value, 10)})} />
             {minLength}
           </label>
 
-          <label style={style.label}>
+          <label className={css.label}>
             Debounce timeout:
-            <input style={style.input}
+            <input className={css.input}
               type="range"
               disabled={infinite}
               value={debounceTimeout} step={100} min={0} max={2000}
@@ -43,31 +45,31 @@ const Customizable = React.createClass({
             {debounceTimeout}
           </label>
 
-          <label style={style.label}>
+          <label className={css.label}>
             Infinite timeout:
-            <input style={style.input}
+            <input className={css.input}
               type="checkbox"
               checked={infinite}
               onChange={e => this.setState({infinite: e.target.checked})} />
           </label>
         </div>
 
-        <div style={style.config}>
-          <label style={style.label}>
+        <div className={css.config}>
+          <label className={css.label}>
             Notify by:
           </label>
 
-          <label style={style.label}>
+          <label className={css.label}>
             "Enter" keypress:
-            <input style={style.input}
+            <input className={css.input}
               type="checkbox"
               checked={forceNotifyByEnter}
               onChange={e => this.setState({forceNotifyByEnter: e.target.checked})} />
           </label>
 
-          <label style={style.label}>
+          <label className={css.label}>
             Blur:
-            <input style={style.input}
+            <input className={css.input}
               type="checkbox"
               checked={forceNotifyOnBlur}
               onChange={e => this.setState({forceNotifyOnBlur: e.target.checked})} />

@@ -1,9 +1,6 @@
 import React from 'react';
-import DebounceInput from '../DebounceInput';
-import * as style from './style';
-
-
-const item = {marginRight: 10};
+import DebounceInput from '../../DebounceInput';
+import css from './App.css';
 
 
 const UndoRedo = React.createClass({
@@ -50,7 +47,7 @@ const UndoRedo = React.createClass({
 
   render() {
     const history = this.state.history.map((value, key) => (
-      <span style={item} key={key}>
+      <span className={css.item} key={key}>
         {key === this.state.historyIndex ? <b>"{value}"</b> : <span>"{value}"</span>}
       </span>
     ));
@@ -58,10 +55,10 @@ const UndoRedo = React.createClass({
 
     return (
       <div>
-        <div style={style.config}>
-          <label style={style.label}>
+        <div className={css.config}>
+          <label className={css.label}>
             Debounced Input:
-            <DebounceInput style={style.input}
+            <DebounceInput className={css.input}
               value={this.state.value}
               minLength={2}
               debounceTimeout={500}
@@ -69,12 +66,12 @@ const UndoRedo = React.createClass({
               onChange={this.onChange} />
           </label>
 
-          <label style={style.label}>
-            <button style={style.input} onClick={this.undo}>Undo</button>
+          <label className={css.label}>
+            <button className={css.input} onClick={this.undo}>Undo</button>
           </label>
 
-          <label style={style.label}>
-            <button style={style.input} onClick={this.redo}>Redo</button>
+          <label className={css.label}>
+            <button className={css.input} onClick={this.redo}>Redo</button>
           </label>
         </div>
 
