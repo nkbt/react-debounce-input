@@ -19,7 +19,6 @@ Can be used as drop-in replacement for `<input type="text" />`
 ## Installation
 
 ### NPM
-
 ```sh
 npm install --save react react-debounce-input
 ```
@@ -30,22 +29,6 @@ Don't forget to manually install peer dependencies (`react`) if you use npm@3.
 ### Bower:
 ```sh
 bower install --save https://npmcdn.com/react-debounce-input/bower.zip
-```
-
-or in `bower.json`
-
-```json
-{
-  "dependencies": {
-    "react-debounce-input": "https://npmcdn.com/react-debounce-input/bower.zip"
-  }
-}
-```
-
-then include as
-```html
-<script src="bower_components/react/react.js"></script>
-<script src="bower_components/react-debounce-input/build/react-debounce-input.js"></script>
 ```
 
 
@@ -59,7 +42,7 @@ then include as
 
 ## Demo
 
-[http://nkbt.github.io/react-debounce-input/example](http://nkbt.github.io/react-debounce-input/example)
+[http://nkbt.github.io/react-debounce-input](http://nkbt.github.io/react-debounce-input)
 
 ## Codepen demo
 
@@ -150,15 +133,14 @@ Will result in
 ## Development and testing
 
 Currently is being developed and tested with the latest stable `Node 5` on `OSX` and `Windows`.
-Should be ok with Node 4, but not guaranteed.
 
-To run example covering all `DebounceInput` features, use `npm start`, which will compile `src/example/Example.js`
+To run example covering all `DebounceInput` features, use `npm start dev`, which will compile `src/example/Example.js`
 
 ```bash
 git clone git@github.com:nkbt/react-debounce-input.git
 cd react-debounce-input
 npm install
-npm start
+npm start dev
 
 # then
 open http://localhost:8080
@@ -167,13 +149,14 @@ open http://localhost:8080
 ## Tests
 
 ```bash
-npm test
-
-# to run tests in watch mode for development
-npm run test:dev
+# to run tests
+npm start test
 
 # to generate test coverage (./reports/coverage)
-npm run test:cov
+npm start test.cov
+
+# to run end-to-end tests
+npm start test.e2e
 ```
 
 ## License

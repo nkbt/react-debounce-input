@@ -1,5 +1,5 @@
 import React from 'react';
-import DebounceInput from '../../DebounceInput';
+import DebounceInput from '../..';
 import css from './App.css';
 
 

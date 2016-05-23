@@ -1,4 +1,5 @@
-.container {
+.app {
+  padding: 2em;
   max-width: 800px;
 }
 
