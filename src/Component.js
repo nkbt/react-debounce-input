@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import {shouldComponentUpdate} from 'react/lib/ReactComponentWithPureRenderMixin';
 
 
-const DebounceInput = React.createClass({
+export const DebounceInput = React.createClass({
   propTypes: {
     onChange: React.PropTypes.func.isRequired,
     onKeyDown: React.PropTypes.func,
@@ -142,13 +142,10 @@ const DebounceInput = React.createClass({
     return (
       <input type="text"
         {...props}
-        value={this.state.value}
         onChange={this.onChange}
+        value={this.state.value}
         {...onKeyDown}
         {...onBlur} />
     );
   }
 });
-
-
-export default DebounceInput;
