@@ -8,7 +8,10 @@ export const DebounceInput = React.createClass({
     onChange: React.PropTypes.func.isRequired,
     onKeyDown: React.PropTypes.func,
     onBlur: React.PropTypes.func,
-    value: React.PropTypes.string,
+    value: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     minLength: React.PropTypes.number,
     debounceTimeout: React.PropTypes.number,
     forceNotifyByEnter: React.PropTypes.bool,
