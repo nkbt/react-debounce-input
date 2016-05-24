@@ -1,3 +1,23 @@
-.idea/
+# Logs
+logs
 *.log
-node_modules
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+/build/
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+/node_modules/
+
+/lib/
+/example/
+/reports/
+
+/.eslintcache
+
+.idea/
+
