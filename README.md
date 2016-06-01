@@ -8,9 +8,8 @@
 [![Dependencies](https://img.shields.io/david/nkbt/react-debounce-input.svg?style=flat-square)](https://david-dm.org/nkbt/react-debounce-input)
 [![Dev Dependencies](https://img.shields.io/david/dev/nkbt/react-debounce-input.svg?style=flat-square)](https://david-dm.org/nkbt/react-debounce-input#info=devDependencies)
 
-React component that renders Input with debounced onChange
-Can be used as drop-in replacement for `<input type="text" />`
-
+React component that renders Input with debounced onChange.
+Can be used as drop-in replacement for `<input type="text" />` or `<textarea />`
 
 
 ![React Debounce Input](src/example/react-debounce-input.gif)
@@ -81,6 +80,40 @@ ReactDOM.render(<App />, appRoot);
 ```
 
 ## Options
+
+#### `type` : PropTypes.string (default: "text")
+
+You can specify any html input type. For example:
+
+```js
+<DebounceInput
+  type="number"
+/>
+```
+
+Will result in
+
+```js
+<input
+  type="number"
+/>
+```
+
+You can also specify type="textarea". For Example:
+
+```js
+<DebounceInput
+  type="textarea"
+/>
+```
+
+Will result in
+
+```js
+<textarea />
+```
+
+When rendering a `<textarea />` you may wish to set `forceNotifyByEnter = { false }` so the user can make new lines without forcing notification of the current value.
 
 
 #### `onChange`: PropTypes.func.isRequired

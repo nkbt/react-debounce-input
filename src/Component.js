@@ -5,6 +5,7 @@ import {shouldComponentUpdate} from 'react/lib/ReactComponentWithPureRenderMixin
 
 export const DebounceInput = React.createClass({
   propTypes: {
+    type: React.PropTypes.string,
     onChange: React.PropTypes.func.isRequired,
     onKeyDown: React.PropTypes.func,
     onBlur: React.PropTypes.func,
@@ -21,6 +22,7 @@ export const DebounceInput = React.createClass({
 
   getDefaultProps() {
     return {
+      type: "text",
       minLength: 0,
       debounceTimeout: 100,
       forceNotifyByEnter: true,
@@ -141,9 +143,21 @@ export const DebounceInput = React.createClass({
         }
       }
     } : {};
-
+    
+    
+    if (props.type === "textarea"){
+      return (
+        <textarea 
+          {...props}
+          onChange={this.onChange}
+          value={this.state.value}
+          {...onKeyDown}
+          {...onBlur} />
+      );
+    }
+    
     return (
-      <input type="text"
+      <input 
         {...props}
         onChange={this.onChange}
         value={this.state.value}
