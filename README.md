@@ -8,7 +8,7 @@
 [![Dependencies](https://img.shields.io/david/nkbt/react-debounce-input.svg?style=flat-square)](https://david-dm.org/nkbt/react-debounce-input)
 [![Dev Dependencies](https://img.shields.io/david/dev/nkbt/react-debounce-input.svg?style=flat-square)](https://david-dm.org/nkbt/react-debounce-input#info=devDependencies)
 
-React component that renders Input with debounced onChange.
+React component that renders an Input, Textarea or other element with debounced onChange.
 Can be used as drop-in replacement for `<input type="text" />` or `<textarea />`
 
 
@@ -81,6 +81,42 @@ ReactDOM.render(<App />, appRoot);
 
 ## Options
 
+#### `element` : PropTypes.string or React.PropTypes.func (default: "input")
+
+You can specify element="textarea". For Example:
+
+```js
+<DebounceInput
+  element="textarea"
+/>
+```
+
+Will result in
+
+```js
+<textarea />
+```
+
+Note: when rendering a `<textarea />` you may wish to set `forceNotifyByEnter = { false }` so the user can make new lines without forcing notification of the current value.
+
+This package has only been tested with `<input />` and `<textarea />` but should work with any element which has `value` and `onChange` props.
+
+You can also use a custom react component as the element. For Example:
+
+```js
+<DebounceInput
+  element={CustomReactComponent}
+/>
+```
+
+Will result in
+
+```js
+<CustomReactComponent />
+```
+
+
+
 #### `type` : PropTypes.string (default: "text")
 
 You can specify any html input type. For example:
@@ -98,22 +134,6 @@ Will result in
   type="number"
 />
 ```
-
-You can also specify type="textarea". For Example:
-
-```js
-<DebounceInput
-  type="textarea"
-/>
-```
-
-Will result in
-
-```js
-<textarea />
-```
-
-When rendering a `<textarea />` you may wish to set `forceNotifyByEnter = { false }` so the user can make new lines without forcing notification of the current value.
 
 
 #### `onChange`: PropTypes.func.isRequired
