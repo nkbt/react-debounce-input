@@ -5,6 +5,8 @@ import {shouldComponentUpdate} from 'react/lib/ReactComponentWithPureRenderMixin
 
 export const DebounceInput = React.createClass({
   propTypes: {
+    element: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.func]),
+    type: React.PropTypes.string,
     onChange: React.PropTypes.func.isRequired,
     onKeyDown: React.PropTypes.func,
     onBlur: React.PropTypes.func,
@@ -21,6 +23,8 @@ export const DebounceInput = React.createClass({
 
   getDefaultProps() {
     return {
+      element: "input",
+      type: "text",
       minLength: 0,
       debounceTimeout: 100,
       forceNotifyByEnter: true,
@@ -142,13 +146,9 @@ export const DebounceInput = React.createClass({
       }
     } : {};
 
-    return (
-      <input type="text"
-        {...props}
-        onChange={this.onChange}
-        value={this.state.value}
-        {...onKeyDown}
-        {...onBlur} />
-    );
+
+    elProps = Object.assign({}, props, { onChange: this.onChange, value : this.state.value }, onKeyDown, onBlur);
+
+    return React.createElement( props.element, {...elProps});
   }
 });
