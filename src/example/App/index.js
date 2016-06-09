@@ -3,6 +3,7 @@ import Controllable from './Controllable';
 import Customizable from './Customizable';
 import UndoRedo from './UndoRedo';
 import Textarea from './Textarea';
+import Uncontrolled from './Uncontrolled';
 import css from './App.css';
 
 
@@ -27,6 +28,11 @@ const App = () => (
     <section className={css.section}>
       <h2>Example 4. Debounced Textarea</h2>
       <Textarea />
+    </section>
+
+    <section className={css.section}>
+      <h2>Example 5. Uncontrolled input</h2>
+      <Uncontrolled />
     </section>
   </div>
 );

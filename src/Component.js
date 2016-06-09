@@ -3,11 +3,14 @@ import debounce from 'lodash.debounce';
 import {shouldComponentUpdate} from 'react/lib/ReactComponentWithPureRenderMixin';
 
 
+const noop = () => {};
+
+
 export const DebounceInput = React.createClass({
   propTypes: {
     element: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.func]),
     type: React.PropTypes.string,
-    onChange: React.PropTypes.func.isRequired,
+    onChange: React.PropTypes.func,
     onKeyDown: React.PropTypes.func,
     onBlur: React.PropTypes.func,
     value: React.PropTypes.oneOfType([
@@ -66,8 +69,8 @@ export const DebounceInput = React.createClass({
 
 
   createNotifier(debounceTimeout) {
-    if (debounceTimeout < 0) {
-      this.notify = () => null;
+    if (debounceTimeout < 0 || !this.props.hasOwnProperty('onChange')) {
+      this.notify = noop;
     } else if (debounceTimeout === 0) {
       this.notify = this.props.onChange;
     } else {
@@ -77,6 +80,10 @@ export const DebounceInput = React.createClass({
 
 
   forceNotify(event) {
+    if (!this.props.hasOwnProperty('onChange')) {
+      return;
+    }
+
     if (this.notify.cancel) {
       this.notify.cancel();
     }
@@ -95,21 +102,43 @@ export const DebounceInput = React.createClass({
   onChange(event) {
     event.persist();
 
-    const oldValue = this.state.value;
+    this.oldValue = this.state.value;
+    this.setState({value: event.target.value}, this.afterSetState);
+  },
 
-    this.setState({value: event.target.value}, () => {
-      const {value} = this.state;
 
-      if (value.length >= this.props.minLength) {
-        this.notify(event);
-        return;
-      }
+  afterSetState() {
+    const {value} = this.state;
 
-      // If user hits backspace and goes below minLength consider it cleaning the value
-      if (oldValue.length > value.length) {
-        this.notify({...event, target: {...event.target, value: ''}});
-      }
-    });
+    if (value.length >= this.props.minLength) {
+      this.notify(event);
+      return;
+    }
+
+    // If user hits backspace and goes below minLength consider it cleaning the value
+    if (this.oldValue.length > value.length) {
+      this.notify({...event, target: {...event.target, value: ''}});
+    }
+  },
+
+
+  onKeyDown(event) {
+    if (event.key === 'Enter') {
+      this.forceNotify(event);
+    }
+    // Invoke original onKeyDown if present
+    if (this.props.hasOwnProperty('onKeyDown')) {
+      this.props.onKeyDown(event);
+    }
+  },
+
+
+  onBlur(event) {
+    this.forceNotify(event);
+    // Invoke original onBlur if present
+    if (this.props.hasOwnProperty('onBlur')) {
+      this.props.onBlur(event);
+    }
   },
 
 
@@ -125,35 +154,17 @@ export const DebounceInput = React.createClass({
       ...props
     } = this.props;
 
-    const onKeyDown = forceNotifyByEnter ? {
-      onKeyDown: event => {
-        if (event.key === 'Enter') {
-          this.forceNotify(event);
-        }
-        // Invoke original onKeyDown if present
-        if (this.props.onKeyDown) {
-          this.props.onKeyDown(event);
-        }
-      }
-    } : {};
-
-    const onBlur = forceNotifyOnBlur ? {
-      onBlur: event => {
-        this.forceNotify(event);
-        // Invoke original onBlur if present
-        if (this.props.onBlur) {
-          this.props.onBlur(event);
-        }
-      }
-    } : {};
-
+    const onChangeProp = this.props.hasOwnProperty('onChange') ? {onChange: this.onChange} : {};
+    const valueProp = this.props.hasOwnProperty('onChange') ? {value: this.state.value} : {};
+    const onKeyDownProp = forceNotifyByEnter ? {onKeyDown: this.onKeyDown} : {};
+    const onBlurProp = forceNotifyOnBlur ? {onBlur: this.onBlur} : {};
 
     return React.createElement(element, {
       ...props,
-      onChange: this.onChange,
-      value: this.state.value,
-      ...onKeyDown,
-      ...onBlur
+      ...valueProp,
+      ...onChangeProp,
+      ...onKeyDownProp,
+      ...onBlurProp
     });
   }
 });
