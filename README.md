@@ -86,9 +86,7 @@ ReactDOM.render(<App />, appRoot);
 You can specify element="textarea". For Example:
 
 ```js
-<DebounceInput
-  element="textarea"
-/>
+<DebounceInput element="textarea" />
 ```
 
 Will result in
@@ -97,16 +95,14 @@ Will result in
 <textarea />
 ```
 
-Note: when rendering a `<textarea />` you may wish to set `forceNotifyByEnter = { false }` so the user can make new lines without forcing notification of the current value.
+Note: when rendering a `<textarea />` you may wish to set `forceNotifyByEnter = {false}` so the user can make new lines without forcing notification of the current value.
 
 This package has only been tested with `<input />` and `<textarea />` but should work with any element which has `value` and `onChange` props.
 
 You can also use a custom react component as the element. For Example:
 
 ```js
-<DebounceInput
-  element={CustomReactComponent}
-/>
+<DebounceInput element={CustomReactComponent} />
 ```
 
 Will result in
@@ -114,27 +110,6 @@ Will result in
 ```js
 <CustomReactComponent />
 ```
-
-
-
-#### `type` : PropTypes.string (default: "text")
-
-You can specify any html input type. For example:
-
-```js
-<DebounceInput
-  type="number"
-/>
-```
-
-Will result in
-
-```js
-<input
-  type="number"
-/>
-```
-
 
 #### `onChange`: PropTypes.func.isRequired
 
@@ -170,6 +145,7 @@ Same as `forceNotifyByEnter`, but notification will be sent when focus leaves th
 
 ```js
 <DebounceInput
+  type="number"
   onChange={event => this.setState({value: event.target.value})}
   placeholder="Name"
   className="user-name" />
@@ -178,7 +154,8 @@ Same as `forceNotifyByEnter`, but notification will be sent when focus leaves th
 Will result in
 
 ```js
-<input type="text"
+<input
+  type="number"
   placeholder="Name"
   className="user-name" />
 ```
