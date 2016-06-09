@@ -2,6 +2,7 @@ import React from 'react';
 import Controllable from './Controllable';
 import Customizable from './Customizable';
 import UndoRedo from './UndoRedo';
+import Textarea from './Textarea';
 import css from './App.css';
 
 
@@ -21,6 +22,11 @@ const App = () => (
     <section className={css.section}>
       <h2>Example 3. Undo-Redo</h2>
       <UndoRedo />
+    </section>
+
+    <section className={css.section}>
+      <h2>Example 4. Debounced Textarea</h2>
+      <Textarea />
     </section>
   </div>
 );
