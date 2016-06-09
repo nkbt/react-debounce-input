@@ -23,8 +23,8 @@ export const DebounceInput = React.createClass({
 
   getDefaultProps() {
     return {
-      element: "input",
-      type: "text",
+      element: 'input',
+      type: 'text',
       minLength: 0,
       debounceTimeout: 100,
       forceNotifyByEnter: true,
@@ -115,6 +115,7 @@ export const DebounceInput = React.createClass({
 
   render() {
     const {
+      element,
       onChange: _onChange,
       value: _value,
       minLength: _minLength,
@@ -147,8 +148,12 @@ export const DebounceInput = React.createClass({
     } : {};
 
 
-    elProps = Object.assign({}, props, { onChange: this.onChange, value : this.state.value }, onKeyDown, onBlur);
-
-    return React.createElement( props.element, {...elProps});
+    return React.createElement(element, {
+      ...props,
+      onChange: this.onChange,
+      value: this.state.value,
+      ...onKeyDown,
+      ...onBlur
+    });
   }
 });
