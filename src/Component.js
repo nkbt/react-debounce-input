@@ -74,10 +74,10 @@ export const DebounceInput = React.createClass({
       this.notify = debounce(this.doNotify, debounceTimeout);
     }
   },
-  
-  
+
+
   doNotify(...args) {
-    this.props.onChange(...args)
+    this.props.onChange(...args);
   },
 
 
