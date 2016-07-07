@@ -40,6 +40,6 @@
   },
   "devDependencies": {
     "p-s": "1.0.2",
-    "react-component-template": "0.1.2"
+    "react-component-template": "0.1.3"
   }
 }
