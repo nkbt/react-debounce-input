@@ -39,7 +39,7 @@
     "lodash.debounce": "^3 || ^4"
   },
   "devDependencies": {
-    "p-s": "1.0.2",
+    "p-s": "2.0.1",
     "react-component-template": "0.1.2"
   }
 }
