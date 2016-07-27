@@ -7,7 +7,7 @@
     "component": "DebounceInput"
   },
   "scripts": {
-    "start": "p-s --config react-component-template/package-scripts -s",
+    "start": "react-component-template",
     "test": "npm start test",
     "precommit": "npm start precommit",
     "prepush": "npm start prepush",
@@ -39,7 +39,6 @@
     "lodash.debounce": "^3 || ^4"
   },
   "devDependencies": {
-    "p-s": "1.0.2",
-    "react-component-template": "0.1.2"
+    "react-component-template": "0.1.4"
   }
 }
