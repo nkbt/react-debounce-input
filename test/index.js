@@ -1,4 +1,4 @@
-import glob from 'glob';
+'use strict';
 
 
-glob.sync('**/*-test.js', {realpath: true, cwd: __dirname}).forEach(require);
+require('react-component-template/test');
