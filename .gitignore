@@ -15,9 +15,7 @@ pids
 
 /lib/
 /example/
+/.coveralls.yml
 /reports/
 
 /.eslintcache
-
-.idea/
-
