@@ -2,6 +2,7 @@ import React from 'react';
 import DebounceInput from '../..';
 import css from './App.css';
 
+const defaultValue = '123';
 
 const Customizable = React.createClass({
   getInitialState() {
@@ -77,12 +78,14 @@ const Customizable = React.createClass({
         </div>
 
         <DebounceInput
+          defaultValue={defaultValue}
           forceNotifyByEnter={forceNotifyByEnter}
           forceNotifyOnBlur={forceNotifyOnBlur}
           minLength={minLength}
           debounceTimeout={infinite ? -1 : debounceTimeout}
           onChange={e => this.setState({value: e.target.value})}
           onKeyDown={e => this.setState({key: e.key})} />
+        <p>Default value: {defaultValue}</p>
         <p>Value: {value}</p>
         <p>Key pressed: {key}</p>
       </div>

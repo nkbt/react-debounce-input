@@ -5,6 +5,10 @@ import {shouldComponentUpdate} from 'react/lib/ReactComponentWithPureRenderMixin
 
 export const DebounceInput = React.createClass({
   propTypes: {
+    defaultValue: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     element: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.func]),
     type: React.PropTypes.string,
     onChange: React.PropTypes.func.isRequired,
@@ -35,7 +39,7 @@ export const DebounceInput = React.createClass({
 
   getInitialState() {
     return {
-      value: this.props.value || ''
+      value: this.props.value || this.props.defaultValue || ''
     };
   },
 
