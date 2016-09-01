@@ -27,14 +27,14 @@ Don't forget to manually install peer dependencies (`react`) if you use npm@3.
 
 ### Bower:
 ```sh
-bower install --save https://npmcdn.com/react-debounce-input/bower.zip
+bower install --save https://unpkg.com/react-debounce-input/bower.zip
 ```
 
 
 ### 1998 Script Tag:
 ```html
-<script src="https://npmcdn.com/react/dist/react.js"></script>
-<script src="https://npmcdn.com/react-debounce-input/build/react-debounce-input.js"></script>
+<script src="https://unpkg.com/react/dist/react.js"></script>
+<script src="https://unpkg.com/react-debounce-input/build/react-debounce-input.js"></script>
 (Module exposed as `DebounceInput`)
 ```
 
