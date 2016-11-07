@@ -41,16 +41,16 @@ export const DebounceInput = React.createClass({
 
 
   componentWillMount() {
-    this.createNotifier(this.props.debounceTimeout);
+    this.createNotifier(this.props.debounceTimeout, this.props.onChange);
   },
 
 
-  componentWillReceiveProps({value, debounceTimeout}) {
+  componentWillReceiveProps({value, debounceTimeout, onChange}) {
     if (typeof value !== 'undefined' && this.state.value !== value) {
       this.setState({value});
     }
-    if (debounceTimeout !== this.props.debounceTimeout) {
-      this.createNotifier(debounceTimeout);
+    if (debounceTimeout !== this.props.debounceTimeout || onChange !== this.props.onChange) {
+      this.createNotifier(debounceTimeout, onChange);
     }
   },
 
@@ -65,13 +65,13 @@ export const DebounceInput = React.createClass({
   },
 
 
-  createNotifier(debounceTimeout) {
+  createNotifier(debounceTimeout, onChange) {
     if (debounceTimeout < 0) {
       this.notify = () => null;
     } else if (debounceTimeout === 0) {
-      this.notify = this.props.onChange;
+      this.notify = onChange;
     } else {
-      this.notify = debounce(this.props.onChange, debounceTimeout);
+      this.notify = debounce(onChange, debounceTimeout);
     }
   },
 
