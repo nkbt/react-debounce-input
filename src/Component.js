@@ -77,7 +77,9 @@ export const DebounceInput = React.createClass({
 
 
   doNotify(...args) {
-    this.props.onChange(...args);
+    const {onChange} = this.props;
+
+    onChange(...args);
   },
 
 
@@ -127,27 +129,29 @@ export const DebounceInput = React.createClass({
       debounceTimeout: _debounceTimeout,
       forceNotifyByEnter,
       forceNotifyOnBlur,
+      onKeyDown,
+      onBlur,
       ...props
     } = this.props;
 
-    const onKeyDown = forceNotifyByEnter ? {
+    const maybeOnKeyDown = forceNotifyByEnter ? {
       onKeyDown: event => {
         if (event.key === 'Enter') {
           this.forceNotify(event);
         }
         // Invoke original onKeyDown if present
-        if (this.props.onKeyDown) {
-          this.props.onKeyDown(event);
+        if (onKeyDown) {
+          onKeyDown(event);
         }
       }
     } : {};
 
-    const onBlur = forceNotifyOnBlur ? {
+    const maybeOnBlur = forceNotifyOnBlur ? {
       onBlur: event => {
         this.forceNotify(event);
         // Invoke original onBlur if present
-        if (this.props.onBlur) {
-          this.props.onBlur(event);
+        if (onBlur) {
+          onBlur(event);
         }
       }
     } : {};
@@ -157,8 +161,8 @@ export const DebounceInput = React.createClass({
       ...props,
       onChange: this.onChange,
       value: this.state.value,
-      ...onKeyDown,
-      ...onBlur
+      ...maybeOnKeyDown,
+      ...maybeOnBlur
     });
   }
 });
