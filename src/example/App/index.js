@@ -6,7 +6,7 @@ import Textarea from './Textarea';
 import css from './App.css';
 
 
-const App = () => (
+const App = () =>
   <div className={css.app}>
     <h1>react-debounce-input</h1>
     <section className={css.section}>
@@ -28,8 +28,7 @@ const App = () => (
       <h2>Example 4. Debounced Textarea</h2>
       <Textarea />
     </section>
-  </div>
-);
+  </div>;
 
 
 export default App;
