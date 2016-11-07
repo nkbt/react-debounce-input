@@ -69,10 +69,15 @@ export const DebounceInput = React.createClass({
     if (debounceTimeout < 0) {
       this.notify = () => null;
     } else if (debounceTimeout === 0) {
-      this.notify = this.props.onChange;
+      this.notify = this.doNotify;
     } else {
-      this.notify = debounce(this.props.onChange, debounceTimeout);
+      this.notify = debounce(this.doNotify, debounceTimeout);
     }
+  },
+
+
+  doNotify(...args) {
+    this.props.onChange(...args);
   },
 
 
@@ -82,12 +87,12 @@ export const DebounceInput = React.createClass({
     }
 
     const {value} = this.state;
-    const {minLength, onChange} = this.props;
+    const {minLength} = this.props;
 
     if (value.length >= minLength) {
-      onChange(event);
+      this.doNotify(event);
     } else {
-      onChange({...event, target: {...event.target, value}});
+      this.doNotify({...event, target: {...event.target, value}});
     }
   },
 
