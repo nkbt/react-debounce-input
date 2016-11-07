@@ -69,10 +69,17 @@ export const DebounceInput = React.createClass({
     if (debounceTimeout < 0) {
       this.notify = () => null;
     } else if (debounceTimeout === 0) {
-      this.notify = this.props.onChange;
+      this.notify = this.doNotify;
     } else {
-      this.notify = debounce(this.props.onChange, debounceTimeout);
+      this.notify = debounce(this.doNotify, debounceTimeout);
     }
+  },
+
+
+  doNotify(...args) {
+    const {onChange} = this.props;
+
+    onChange(...args);
   },
 
 
@@ -82,12 +89,12 @@ export const DebounceInput = React.createClass({
     }
 
     const {value} = this.state;
-    const {minLength, onChange} = this.props;
+    const {minLength} = this.props;
 
     if (value.length >= minLength) {
-      onChange(event);
+      this.doNotify(event);
     } else {
-      onChange({...event, target: {...event.target, value}});
+      this.doNotify({...event, target: {...event.target, value}});
     }
   },
 
@@ -122,27 +129,29 @@ export const DebounceInput = React.createClass({
       debounceTimeout: _debounceTimeout,
       forceNotifyByEnter,
       forceNotifyOnBlur,
+      onKeyDown,
+      onBlur,
       ...props
     } = this.props;
 
-    const onKeyDown = forceNotifyByEnter ? {
+    const maybeOnKeyDown = forceNotifyByEnter ? {
       onKeyDown: event => {
         if (event.key === 'Enter') {
           this.forceNotify(event);
         }
         // Invoke original onKeyDown if present
-        if (this.props.onKeyDown) {
-          this.props.onKeyDown(event);
+        if (onKeyDown) {
+          onKeyDown(event);
         }
       }
     } : {};
 
-    const onBlur = forceNotifyOnBlur ? {
+    const maybeOnBlur = forceNotifyOnBlur ? {
       onBlur: event => {
         this.forceNotify(event);
         // Invoke original onBlur if present
-        if (this.props.onBlur) {
-          this.props.onBlur(event);
+        if (onBlur) {
+          onBlur(event);
         }
       }
     } : {};
@@ -152,8 +161,8 @@ export const DebounceInput = React.createClass({
       ...props,
       onChange: this.onChange,
       value: this.state.value,
-      ...onKeyDown,
-      ...onBlur
+      ...maybeOnKeyDown,
+      ...maybeOnBlur
     });
   }
 });

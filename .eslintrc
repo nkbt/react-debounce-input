@@ -1,3 +1,6 @@
 {
-  "extends": "./node_modules/react-component-template/.eslintrc"
+  "extends": "./node_modules/react-component-template/.eslintrc",
+  "rules": {
+    "react/jsx-sort-props": 0
+  }
 }

@@ -35,22 +35,21 @@ const UndoRedo = React.createClass({
   },
 
 
-  redo() {
+  onRedo() {
     this.setValueFromHistory(this.state.historyIndex + 1);
   },
 
 
-  undo() {
+  onUndo() {
     this.setValueFromHistory(this.state.historyIndex - 1);
   },
 
 
   render() {
-    const history = this.state.history.map((value, key) => (
+    const history = this.state.history.map((value, key) =>
       <span className={css.item} key={key}>
         {key === this.state.historyIndex ? <b>"{value}"</b> : <span>"{value}"</span>}
-      </span>
-    ));
+      </span>);
 
 
     return (
@@ -67,11 +66,11 @@ const UndoRedo = React.createClass({
           </label>
 
           <label className={css.label}>
-            <button className={css.input} onClick={this.undo}>Undo</button>
+            <button className={css.input} onClick={this.onUndo}>Undo</button>
           </label>
 
           <label className={css.label}>
-            <button className={css.input} onClick={this.redo}>Redo</button>
+            <button className={css.input} onClick={this.onRedo}>Redo</button>
           </label>
         </div>
 
