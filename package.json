@@ -39,6 +39,6 @@
     "lodash.debounce": "^3 || ^4"
   },
   "devDependencies": {
-    "react-component-template": "0.1.5"
+    "react-component-template": "0.1.9"
   }
 }
