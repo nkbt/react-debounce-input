@@ -36,9 +36,11 @@
     "react": "^0.14 || ^15"
   },
   "dependencies": {
-    "lodash.debounce": "^3 || ^4"
+    "lodash.debounce": "^3 || ^4",
+    "prop-types": "^15"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "react-component-template": "0.1.9"
   }
 }
