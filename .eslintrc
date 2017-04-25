@@ -1,6 +1,11 @@
 {
   "extends": "./node_modules/react-component-template/.eslintrc",
+  "plugins": [
+    "babel"
+  ],
   "rules": {
+    "babel/no-invalid-this": 2,
+    "no-invalid-this": 0,
     "react/jsx-sort-props": 0
   }
 }

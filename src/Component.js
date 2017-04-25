@@ -39,8 +39,6 @@ export class DebounceInput extends React.PureComponent {
     };
 
     this.isDebouncing = false;
-
-    this.onChange = this.onChange.bind(this);
   }
 
 
@@ -69,7 +67,7 @@ export class DebounceInput extends React.PureComponent {
   }
 
 
-  createNotifier(debounceTimeout) {
+  createNotifier = debounceTimeout => {
     if (debounceTimeout < 0) {
       this.notify = () => null;
     } else if (debounceTimeout === 0) {
@@ -88,14 +86,14 @@ export class DebounceInput extends React.PureComponent {
   }
 
 
-  doNotify(...args) {
+  doNotify = (...args) => {
     const {onChange} = this.props;
 
     onChange(...args);
   }
 
 
-  forceNotify(event) {
+  forceNotify = event => {
     if (!this.isDebouncing) {
       return;
     }
@@ -116,7 +114,7 @@ export class DebounceInput extends React.PureComponent {
   }
 
 
-  onChange(event) {
+  onChange = event => {
     event.persist();
 
     const oldValue = this.state.value;
