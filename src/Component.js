@@ -1,48 +1,50 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-import {shouldComponentUpdate} from 'react/lib/ReactComponentWithPureRenderMixin';
 
 
-export const DebounceInput = React.createClass({
-  propTypes: {
-    element: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.func]),
-    type: React.PropTypes.string,
-    onChange: React.PropTypes.func.isRequired,
-    onKeyDown: React.PropTypes.func,
-    onBlur: React.PropTypes.func,
-    value: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+export class DebounceInput extends React.PureComponent {
+  static propTypes = {
+    element: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    type: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    onKeyDown: PropTypes.func,
+    onBlur: PropTypes.func,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
-    minLength: React.PropTypes.number,
-    debounceTimeout: React.PropTypes.number,
-    forceNotifyByEnter: React.PropTypes.bool,
-    forceNotifyOnBlur: React.PropTypes.bool
-  },
+    minLength: PropTypes.number,
+    debounceTimeout: PropTypes.number,
+    forceNotifyByEnter: PropTypes.bool,
+    forceNotifyOnBlur: PropTypes.bool
+  };
 
 
-  getDefaultProps() {
-    return {
-      element: 'input',
-      type: 'text',
-      minLength: 0,
-      debounceTimeout: 100,
-      forceNotifyByEnter: true,
-      forceNotifyOnBlur: true
+  static defaultProps = {
+    element: 'input',
+    type: 'text',
+    minLength: 0,
+    debounceTimeout: 100,
+    forceNotifyByEnter: true,
+    forceNotifyOnBlur: true
+  };
+
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: props.value || ''
     };
-  },
 
-
-  getInitialState() {
-    return {
-      value: this.props.value || ''
-    };
-  },
+    this.isDebouncing = false;
+  }
 
 
   componentWillMount() {
     this.createNotifier(this.props.debounceTimeout);
-  },
+  }
 
 
   componentWillReceiveProps({value, debounceTimeout}) {
@@ -55,21 +57,17 @@ export const DebounceInput = React.createClass({
     if (debounceTimeout !== this.props.debounceTimeout) {
       this.createNotifier(debounceTimeout);
     }
-  },
-
-
-  shouldComponentUpdate,
+  }
 
 
   componentWillUnmount() {
     if (this.notify.flush) {
       this.notify.flush();
     }
-  },
+  }
 
-  isDebouncing: false,
 
-  createNotifier(debounceTimeout) {
+  createNotifier = debounceTimeout => {
     if (debounceTimeout < 0) {
       this.notify = () => null;
     } else if (debounceTimeout === 0) {
@@ -85,16 +83,17 @@ export const DebounceInput = React.createClass({
         debouncedChangeFunc(event);
       };
     }
-  },
+  }
 
-  doNotify(...args) {
+
+  doNotify = (...args) => {
     const {onChange} = this.props;
 
     onChange(...args);
-  },
+  }
 
 
-  forceNotify(event) {
+  forceNotify = event => {
     if (!this.isDebouncing) {
       return;
     }
@@ -112,10 +111,10 @@ export const DebounceInput = React.createClass({
     } else {
       this.doNotify({...event, target: {...event.target, value}});
     }
-  },
+  }
 
 
-  onChange(event) {
+  onChange = event => {
     event.persist();
 
     const oldValue = this.state.value;
@@ -133,7 +132,7 @@ export const DebounceInput = React.createClass({
         this.notify({...event, target: {...event.target, value: ''}});
       }
     });
-  },
+  }
 
 
   render() {
@@ -181,4 +180,4 @@ export const DebounceInput = React.createClass({
       ...maybeOnBlur
     });
   }
-});
+}
