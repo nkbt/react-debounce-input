@@ -42,6 +42,6 @@
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.24.1",
     "eslint-plugin-babel": "^4.1.1",
-    "react-component-template": "0.1.9"
+    "react-component-template": "0.1.10"
   }
 }
