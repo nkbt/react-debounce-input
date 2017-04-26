@@ -83,14 +83,14 @@ export class DebounceInput extends React.PureComponent {
         debouncedChangeFunc(event);
       };
     }
-  }
+  };
 
 
   doNotify = (...args) => {
     const {onChange} = this.props;
 
     onChange(...args);
-  }
+  };
 
 
   forceNotify = event => {
@@ -111,7 +111,7 @@ export class DebounceInput extends React.PureComponent {
     } else {
       this.doNotify({...event, target: {...event.target, value}});
     }
-  }
+  };
 
 
   onChange = event => {
@@ -132,7 +132,7 @@ export class DebounceInput extends React.PureComponent {
         this.notify({...event, target: {...event.target, value: ''}});
       }
     });
-  }
+  };
 
 
   render() {

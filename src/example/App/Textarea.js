@@ -3,18 +3,15 @@ import DebounceInput from '../..';
 import css from './App.css';
 
 
-const Textarea = React.createClass({
-  getInitialState() {
-    return {
-      value: '',
-      minLength: 0,
-      debounceTimeout: 500,
-      infinite: false,
-      forceNotifyByEnter: false,
-      forceNotifyOnBlur: true
-    };
-  },
-
+class Textarea extends React.Component {
+  state = {
+    value: '',
+    minLength: 0,
+    debounceTimeout: 500,
+    infinite: false,
+    forceNotifyByEnter: false,
+    forceNotifyOnBlur: true
+  };
 
   render() {
     const {
@@ -92,7 +89,7 @@ const Textarea = React.createClass({
 
     );
   }
-});
+}
 
 
 export default Textarea;
