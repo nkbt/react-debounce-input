@@ -3,14 +3,11 @@ import DebounceInput from '../..';
 import css from './App.css';
 
 
-const Controllable = React.createClass({
-  getInitialState() {
-    return {
-      value: '',
-      debouncedValue: ''
-    };
-  },
-
+class Controllable extends React.Component {
+  state = {
+    value: '',
+    debouncedValue: ''
+  };
 
   render() {
     const {value, debouncedValue} = this.state;
@@ -43,7 +40,7 @@ const Controllable = React.createClass({
       </div>
     );
   }
-});
+}
 
 
 export default Controllable;

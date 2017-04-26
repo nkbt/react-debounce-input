@@ -3,17 +3,14 @@ import DebounceInput from '../..';
 import css from './App.css';
 
 
-const UndoRedo = React.createClass({
-  getInitialState() {
-    return {
-      value: '',
-      history: [''],
-      historyIndex: 0
-    };
-  },
+class UndoRedo extends React.Component {
+  state = {
+    value: '',
+    history: [''],
+    historyIndex: 0
+  };
 
-
-  onChange({target: {value}}) {
+  onChange = ({target: {value}}) => {
     const {historyIndex, history} = this.state;
 
     this.setState({
@@ -21,10 +18,17 @@ const UndoRedo = React.createClass({
       historyIndex: historyIndex + 1,
       history: [...history.slice(0, historyIndex + 1), value]
     });
-  },
+  };
 
+  onRedo = () => {
+    this.setValueFromHistory(this.state.historyIndex + 1);
+  };
 
-  setValueFromHistory(index) {
+  onUndo = () => {
+    this.setValueFromHistory(this.state.historyIndex - 1);
+  };
+
+  setValueFromHistory = (index) => {
     const {history} = this.state;
     const historyIndex = Math.min(Math.max(index, 0), history.length - 1);
 
@@ -32,18 +36,7 @@ const UndoRedo = React.createClass({
       value: history[historyIndex],
       historyIndex
     });
-  },
-
-
-  onRedo() {
-    this.setValueFromHistory(this.state.historyIndex + 1);
-  },
-
-
-  onUndo() {
-    this.setValueFromHistory(this.state.historyIndex - 1);
-  },
-
+  };
 
   render() {
     const history = this.state.history.map((value, key) =>
@@ -80,7 +73,7 @@ const UndoRedo = React.createClass({
       </div>
     );
   }
-});
+}
 
 
 export default UndoRedo;
