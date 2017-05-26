@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "lodash.debounce": "^3 || ^4",
-    "prop-types": "15.5.9"
+    "prop-types": "^15"
   },
   "devDependencies": {
     "eslint-plugin-babel": "4.1.1",
