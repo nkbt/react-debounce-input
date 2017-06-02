@@ -82,6 +82,7 @@ export class DebounceInput extends React.PureComponent {
         this.isDebouncing = true;
         debouncedChangeFunc(event);
       };
+      this.notify.flush = debouncedChangeFunc.flush;
     }
   };
 
