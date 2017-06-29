@@ -149,27 +149,45 @@ export class DebounceInput extends React.PureComponent {
       ...props
     } = this.props;
 
-    const maybeOnKeyDown = forceNotifyByEnter ? {
-      onKeyDown: event => {
-        if (event.key === 'Enter') {
-          this.forceNotify(event);
-        }
-        // Invoke original onKeyDown if present
-        if (onKeyDown) {
-          onKeyDown(event);
-        }
-      }
-    } : {};
 
-    const maybeOnBlur = forceNotifyOnBlur ? {
-      onBlur: event => {
-        this.forceNotify(event);
-        // Invoke original onBlur if present
-        if (onBlur) {
-          onBlur(event);
+    if (forceNotifyByEnter){
+      const maybeOnKeyDown = {
+        onKeyDown: event => {
+          if (event.key === 'Enter') {
+            this.forceNotify(event);
+          }
+          // Invoke original onKeyDown if present
+          if (onKeyDown) {
+            onKeyDown(event);
+          }
         }
       }
-    } : {};
+    }
+    else if (onKeyDown){
+      const maybeOnKeyDown = { onKeyDown }
+    }
+    else {
+      const maybeOnKeyDown = {}
+    }
+
+
+    if (forceNotifyOnBlur){
+      const maybeOnBlur = {
+        onBlur: event => {
+          this.forceNotify(event);
+          // Invoke original onBlur if present
+          if (onBlur) {
+            onBlur(event);
+          }
+        }
+      }
+    }
+    else if ( onBlur ){
+      const maybeOnBlur = { onBlur }
+    }
+    else {
+      const maybeOnBlur = {}
+    }
 
 
     return React.createElement(element, {
