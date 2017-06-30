@@ -149,9 +149,10 @@ export class DebounceInput extends React.PureComponent {
       ...props
     } = this.props;
 
-
+    let maybeOnKeyDown;
+    
     if (forceNotifyByEnter){
-      const maybeOnKeyDown = {
+      maybeOnKeyDown = {
         onKeyDown: event => {
           if (event.key === 'Enter') {
             this.forceNotify(event);
@@ -164,15 +165,17 @@ export class DebounceInput extends React.PureComponent {
       }
     }
     else if (onKeyDown){
-      const maybeOnKeyDown = { onKeyDown }
+      maybeOnKeyDown = {onKeyDown}
     }
     else {
-      const maybeOnKeyDown = {}
+      maybeOnKeyDown = {}
     }
 
-
+    
+    let maybeOnBlur;
+    
     if (forceNotifyOnBlur){
-      const maybeOnBlur = {
+      maybeOnBlur = {
         onBlur: event => {
           this.forceNotify(event);
           // Invoke original onBlur if present
@@ -182,11 +185,11 @@ export class DebounceInput extends React.PureComponent {
         }
       }
     }
-    else if ( onBlur ){
-      const maybeOnBlur = { onBlur }
+    else if (onBlur){
+      maybeOnBlur = {onBlur}
     }
     else {
-      const maybeOnBlur = {}
+      maybeOnBlur = {}
     }
 
 
