@@ -61,8 +61,8 @@ export class DebounceInput extends React.PureComponent {
 
 
   componentWillUnmount() {
-    if (this.notify.flush) {
-      this.notify.flush();
+    if (this.flush) {
+      this.flush();
     }
   }
 
@@ -82,6 +82,15 @@ export class DebounceInput extends React.PureComponent {
         this.isDebouncing = true;
         debouncedChangeFunc(event);
       };
+
+      this.flush = () => {
+        debouncedChangeFunc.flush();
+      };
+
+      this.cancel = () => {
+        this.isDebouncing = false;
+        debouncedChangeFunc.cancel();
+      };
     }
   };
 
@@ -98,9 +107,8 @@ export class DebounceInput extends React.PureComponent {
       return;
     }
 
-    if (this.notify.cancel) {
-      this.notify.cancel();
-      this.isDebouncing = false;
+    if (this.cancel) {
+      this.cancel();
     }
 
     const {value} = this.state;
@@ -149,27 +157,44 @@ export class DebounceInput extends React.PureComponent {
       ...props
     } = this.props;
 
-    const maybeOnKeyDown = forceNotifyByEnter ? {
-      onKeyDown: event => {
-        if (event.key === 'Enter') {
-          this.forceNotify(event);
-        }
-        // Invoke original onKeyDown if present
-        if (onKeyDown) {
-          onKeyDown(event);
-        }
-      }
-    } : {};
+    let maybeOnKeyDown;
 
-    const maybeOnBlur = forceNotifyOnBlur ? {
-      onBlur: event => {
-        this.forceNotify(event);
-        // Invoke original onBlur if present
-        if (onBlur) {
-          onBlur(event);
+    if (forceNotifyByEnter) {
+      maybeOnKeyDown = {
+        onKeyDown: event => {
+          if (event.key === 'Enter') {
+            this.forceNotify(event);
+          }
+          // Invoke original onKeyDown if present
+          if (onKeyDown) {
+            onKeyDown(event);
+          }
         }
-      }
-    } : {};
+      };
+    } else if (onKeyDown) {
+      maybeOnKeyDown = {onKeyDown};
+    } else {
+      maybeOnKeyDown = {};
+    }
+
+
+    let maybeOnBlur;
+
+    if (forceNotifyOnBlur) {
+      maybeOnBlur = {
+        onBlur: event => {
+          this.forceNotify(event);
+          // Invoke original onBlur if present
+          if (onBlur) {
+            onBlur(event);
+          }
+        }
+      };
+    } else if (onBlur) {
+      maybeOnBlur = {onBlur};
+    } else {
+      maybeOnBlur = {};
+    }
 
 
     return React.createElement(element, {
