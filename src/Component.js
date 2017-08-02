@@ -83,11 +83,11 @@ export class DebounceInput extends React.PureComponent {
         debouncedChangeFunc(event);
       };
 
-      this.flush = ()=> {
+      this.flush = () => {
         debouncedChangeFunc.flush();
       };
 
-      this.cancel = ()=> {
+      this.cancel = () => {
         this.isDebouncing = false;
         debouncedChangeFunc.cancel();
       };
@@ -159,7 +159,7 @@ export class DebounceInput extends React.PureComponent {
 
     let maybeOnKeyDown;
 
-    if (forceNotifyByEnter){
+    if (forceNotifyByEnter) {
       maybeOnKeyDown = {
         onKeyDown: event => {
           if (event.key === 'Enter') {
@@ -170,19 +170,17 @@ export class DebounceInput extends React.PureComponent {
             onKeyDown(event);
           }
         }
-      }
-    }
-    else if (onKeyDown){
-      maybeOnKeyDown = {onKeyDown}
-    }
-    else {
-      maybeOnKeyDown = {}
+      };
+    } else if (onKeyDown) {
+      maybeOnKeyDown = {onKeyDown};
+    } else {
+      maybeOnKeyDown = {};
     }
 
 
     let maybeOnBlur;
 
-    if (forceNotifyOnBlur){
+    if (forceNotifyOnBlur) {
       maybeOnBlur = {
         onBlur: event => {
           this.forceNotify(event);
@@ -191,13 +189,11 @@ export class DebounceInput extends React.PureComponent {
             onBlur(event);
           }
         }
-      }
-    }
-    else if (onBlur){
-      maybeOnBlur = {onBlur}
-    }
-    else {
-      maybeOnBlur = {}
+      };
+    } else if (onBlur) {
+      maybeOnBlur = {onBlur};
+    } else {
+      maybeOnBlur = {};
     }
 
 
