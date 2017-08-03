@@ -40,14 +40,19 @@ jobs:
 
       - run:
           name: Test
-          command: NODE_ENV=test $(yarn bin)/babel-node $(yarn bin)/babel-istanbul cover --report text --report lcov --verbose --dir ${CIRCLE_ARTIFACTS}/coverage ./test
+          command: NODE_ENV=test $(yarn bin)/babel-node $(yarn bin)/babel-istanbul cover --report text --report lcov --verbose --dir ./coverage ./test
 
 
       - run:
           name: End-to-end Smoketest
-          command: REPORT_DIR=${CIRCLE_TEST_REPORTS} LOG_DIR=${CIRCLE_ARTIFACTS} NODE_ENV=development $(yarn bin)/nightwatch-autorun
+          command: REPORT_DIR=./coverage LOG_DIR=./coverage NODE_ENV=development $(yarn bin)/nightwatch-autorun
 
 
       - deploy:
           name: Codecov
-          command: cat ${CIRCLE_ARTIFACTS}/coverage/lcov.info | $(yarn bin)/codecov
+          command: cat ./coverage/lcov.info | $(yarn bin)/codecov
+
+
+      - store_artifacts:
+          path: ./coverage
+          destination: coverage
