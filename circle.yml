@@ -1,19 +1,47 @@
-machine:
-  node:
-    version: 8
+version: 2
 
 
-dependencies:
-  override:
-    - yarn install
+jobs:
+  build:
+    working_directory: ~/react-debounce-input
+    docker:
+      - image: circleci/node:8
 
 
-test:
-  override:
-    - $(yarn bin)/eslint .
-    - NODE_ENV=test $(yarn bin)/babel-node $(yarn bin)/babel-istanbul cover --report text --report lcov --verbose --dir ${CIRCLE_ARTIFACTS}/coverage ./test
-    - REPORT_DIR=${CIRCLE_TEST_REPORTS} LOG_DIR=${CIRCLE_ARTIFACTS} NODE_ENV=development $(yarn bin)/nightwatch-autorun
+    steps:
+      - checkout
 
 
-  post:
-    - cat ${CIRCLE_ARTIFACTS}/coverage/lcov.info | $(yarn bin)/codecov
+      - restore_cache:
+          key: deps-{{ checksum "yarn.lock" }}
+
+
+      - run:
+          name: Install dependencies
+          command: yarn install --pure-lockfile
+
+
+      - save_cache:
+          key: deps-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
+
+      - run:
+          name: Lint
+          command: $(yarn bin)/eslint .
+
+
+      - run:
+          name: Test
+          command: NODE_ENV=test $(yarn bin)/babel-node $(yarn bin)/babel-istanbul cover --report text --report lcov --verbose --dir ${CIRCLE_ARTIFACTS}/coverage ./test
+
+
+      - run:
+          name: End-to-end Smoketest
+          command: REPORT_DIR=${CIRCLE_TEST_REPORTS} LOG_DIR=${CIRCLE_ARTIFACTS} NODE_ENV=development $(yarn bin)/nightwatch-autorun
+
+
+      - deploy:
+          name: Codecov
+          command: cat ${CIRCLE_ARTIFACTS}/coverage/lcov.info | $(yarn bin)/codecov
