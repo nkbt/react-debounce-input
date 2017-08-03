@@ -28,7 +28,7 @@ class UndoRedo extends React.Component {
     this.setValueFromHistory(this.state.historyIndex - 1);
   };
 
-  setValueFromHistory = (index) => {
+  setValueFromHistory = index => {
     const {history} = this.state;
     const historyIndex = Math.min(Math.max(index, 0), history.length - 1);
 

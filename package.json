@@ -9,8 +9,6 @@
   "scripts": {
     "start": "react-component-template",
     "test": "npm start test",
-    "precommit": "npm start precommit",
-    "prepush": "npm start prepush",
     "postversion": "npm start postversion",
     "prepublish": "npm start prepublish"
   },
@@ -36,11 +34,11 @@
     "react": ">=15.3"
   },
   "dependencies": {
-    "lodash.debounce": "^3 || ^4",
+    "lodash.debounce": "^4",
     "prop-types": "^15"
   },
   "devDependencies": {
-    "eslint-plugin-babel": "4.1.1",
+    "eslint-plugin-babel": "4.1.2",
     "react-component-template": "0.1.10"
   }
 }
