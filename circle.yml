@@ -12,6 +12,12 @@ jobs:
       - checkout
 
 
+      - run:
+          name: Update yarn
+          command: sudo yarn global add yarn
+
+
+
       - restore_cache:
           key: deps-{{ checksum "yarn.lock" }}
 
