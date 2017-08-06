@@ -24,6 +24,9 @@ export class DebounceInput extends React.PureComponent {
   static defaultProps = {
     element: 'input',
     type: 'text',
+    onKeyDown: undefined,
+    onBlur: undefined,
+    value: undefined,
     minLength: 0,
     debounceTimeout: 100,
     forceNotifyByEnter: true,
@@ -65,6 +68,27 @@ export class DebounceInput extends React.PureComponent {
       this.flush();
     }
   }
+
+
+  onChange = event => {
+    event.persist();
+
+    const oldValue = this.state.value;
+
+    this.setState({value: event.target.value}, () => {
+      const {value} = this.state;
+
+      if (value.length >= this.props.minLength) {
+        this.notify(event);
+        return;
+      }
+
+      // If user hits backspace and goes below minLength consider it cleaning the value
+      if (oldValue.length > value.length) {
+        this.notify({...event, target: {...event.target, value: ''}});
+      }
+    });
+  };
 
 
   createNotifier = debounceTimeout => {
@@ -119,27 +143,6 @@ export class DebounceInput extends React.PureComponent {
     } else {
       this.doNotify({...event, target: {...event.target, value}});
     }
-  };
-
-
-  onChange = event => {
-    event.persist();
-
-    const oldValue = this.state.value;
-
-    this.setState({value: event.target.value}, () => {
-      const {value} = this.state;
-
-      if (value.length >= this.props.minLength) {
-        this.notify(event);
-        return;
-      }
-
-      // If user hits backspace and goes below minLength consider it cleaning the value
-      if (oldValue.length > value.length) {
-        this.notify({...event, target: {...event.target, value: ''}});
-      }
-    });
   };
 
 

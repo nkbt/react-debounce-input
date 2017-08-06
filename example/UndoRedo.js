@@ -1,9 +1,8 @@
 import React from 'react';
-import DebounceInput from '../..';
-import css from './App.css';
+import {DebounceInput} from '../src';
 
 
-class UndoRedo extends React.Component {
+export class UndoRedo extends React.Component {
   state = {
     value: '',
     history: [''],
@@ -40,17 +39,18 @@ class UndoRedo extends React.Component {
 
   render() {
     const history = this.state.history.map((value, key) =>
-      <span className={css.item} key={key}>
-        {key === this.state.historyIndex ? <b>"{value}"</b> : <span>"{value}"</span>}
-      </span>);
+      (<span className="item" key={key}>
+        {key === this.state.historyIndex ? <b>{`"${value}"`}</b> : <span>{`"${value}"`}</span>}
+      </span>));
 
 
     return (
       <div>
-        <div className={css.config}>
-          <label className={css.label}>
+        <div className="config">
+          <label className="label">
             Debounced Input:
-            <DebounceInput className={css.input}
+            <DebounceInput
+              className="input"
               value={this.state.value}
               minLength={2}
               debounceTimeout={500}
@@ -58,12 +58,12 @@ class UndoRedo extends React.Component {
               onChange={this.onChange} />
           </label>
 
-          <label className={css.label}>
-            <button className={css.input} onClick={this.onUndo}>Undo</button>
+          <label className="label">
+            <button className="input" onClick={this.onUndo}>Undo</button>
           </label>
 
-          <label className={css.label}>
-            <button className={css.input} onClick={this.onRedo}>Redo</button>
+          <label className="label">
+            <button className="input" onClick={this.onRedo}>Redo</button>
           </label>
         </div>
 
@@ -74,6 +74,3 @@ class UndoRedo extends React.Component {
     );
   }
 }
-
-
-export default UndoRedo;
