@@ -11,7 +11,7 @@ React component that renders an Input, Textarea or other element with debounced 
 Can be used as drop-in replacement for `<input type="text" />` or `<textarea />`
 
 
-![React Debounce Input](src/example/react-debounce-input.gif)
+![React Debounce Input](react-debounce-input.gif)
 
 
 ## Installation
@@ -161,15 +161,15 @@ Will result in
 
 ## Development and testing
 
-Currently is being developed and tested with the latest stable `Node 6` on `OSX` and `Windows`.
+Currently is being developed and tested with the latest stable `Node 8` on `OSX`.
 
-To run example covering all `DebounceInput` features, use `yarn start dev`, which will compile `src/example/Example.js`
+To run example covering all `DebounceInput` features, use `yarn start`, which will compile `example/Example.js`
 
 ```bash
 git clone git@github.com:nkbt/react-debounce-input.git
 cd react-debounce-input
 yarn install
-yarn start dev
+yarn start
 
 # then
 open http://localhost:8080
@@ -178,14 +178,14 @@ open http://localhost:8080
 ## Tests
 
 ```bash
-# to run tests
-yarn start test
+# to run ESLint check
+yarn lint
 
-# to generate test coverage (./reports/coverage)
-yarn start test.cov
+# to run tests
+yarn test
 
 # to run end-to-end tests
-yarn start test.e2e
+yarn e2e
 ```
 
 ## License

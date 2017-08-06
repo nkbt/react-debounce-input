@@ -1,9 +1,8 @@
 import React from 'react';
-import DebounceInput from '../..';
-import css from './App.css';
+import {DebounceInput} from '../src';
 
 
-class Controllable extends React.Component {
+export class Controllable extends React.Component {
   state = {
     value: '',
     debouncedValue: ''
@@ -14,10 +13,10 @@ class Controllable extends React.Component {
 
     return (
       <div>
-        <div className={css.config}>
-          <label className={css.label}>
+        <div className="config">
+          <label className="label">
             Contollable input:
-            <input className={css.input}
+            <input className="input"
               type="text"
               value={value}
               onChange={e => this.setState({value: e.target.value})} />
@@ -25,10 +24,10 @@ class Controllable extends React.Component {
           </label>
         </div>
 
-        <div className={css.config}>
-          <label className={css.label}>
+        <div className="config">
+          <label className="label">
             Debounced input:
-            <DebounceInput className={css.input}
+            <DebounceInput className="input"
               value={value}
               minLength={2}
               debounceTimeout={500}
@@ -41,6 +40,3 @@ class Controllable extends React.Component {
     );
   }
 }
-
-
-export default Controllable;
