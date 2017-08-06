@@ -101,4 +101,7 @@ const run = async ({cwd}) => {
 };
 
 
+require(`./pub`);
+
+
 run({cwd: CWD});
