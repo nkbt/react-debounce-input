@@ -1,0 +1,26 @@
+.app {
+  padding: 2em;
+  max-width: 800px;
+}
+
+.section {
+  padding-bottom: 40px;
+}
+
+.config {
+  padding-bottom: 20px;
+}
+
+.label {
+  padding-right: 20px;
+}
+
+.input {
+  margin-right: 10px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.item {
+  margin-right: 10px;
+}
