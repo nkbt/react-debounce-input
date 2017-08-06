@@ -16,7 +16,8 @@ export class Controllable extends React.Component {
         <div className="config">
           <label className="label">
             Contollable input:
-            <input className="input"
+            <input
+              className="input"
               type="text"
               value={value}
               onChange={e => this.setState({value: e.target.value})} />
@@ -27,7 +28,8 @@ export class Controllable extends React.Component {
         <div className="config">
           <label className="label">
             Debounced input:
-            <DebounceInput className="input"
+            <DebounceInput
+              className="input"
               value={value}
               minLength={2}
               debounceTimeout={500}

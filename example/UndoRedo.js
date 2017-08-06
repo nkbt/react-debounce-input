@@ -39,9 +39,9 @@ export class UndoRedo extends React.Component {
 
   render() {
     const history = this.state.history.map((value, key) =>
-      <span className="item" key={key}>
-        {key === this.state.historyIndex ? <b>"{value}"</b> : <span>"{value}"</span>}
-      </span>);
+      (<span className="item" key={key}>
+        {key === this.state.historyIndex ? <b>{`"${value}"`}</b> : <span>{`"${value}"`}</span>}
+      </span>));
 
 
     return (
@@ -49,7 +49,8 @@ export class UndoRedo extends React.Component {
         <div className="config">
           <label className="label">
             Debounced Input:
-            <DebounceInput className="input"
+            <DebounceInput
+              className="input"
               value={this.state.value}
               minLength={2}
               debounceTimeout={500}

@@ -24,26 +24,35 @@ export class Textarea extends React.Component {
         <div className="config">
           <label className="label">
             Min length:
-            <input className="input"
+            <input
+              className="input"
               type="range"
-              value={minLength} step={1} min={0} max={10}
+              value={minLength}
+              step={1}
+              min={0}
+              max={10}
               onChange={e => this.setState({minLength: parseInt(e.target.value, 10)})} />
             {minLength}
           </label>
 
           <label className="label">
             Debounce timeout:
-            <input className="input"
+            <input
+              className="input"
               type="range"
               disabled={infinite}
-              value={debounceTimeout} step={100} min={0} max={2000}
+              value={debounceTimeout}
+              step={100}
+              min={0}
+              max={2000}
               onChange={e => this.setState({debounceTimeout: parseInt(e.target.value, 10)})} />
             {debounceTimeout}
           </label>
 
           <label className="label">
             Infinite timeout:
-            <input className="input"
+            <input
+              className="input"
               type="checkbox"
               checked={infinite}
               onChange={e => this.setState({infinite: e.target.checked})} />
@@ -56,8 +65,9 @@ export class Textarea extends React.Component {
           </label>
 
           <label className="label">
-            "Enter" keypress:
-            <input className="input"
+            Enter keypress:
+            <input
+              className="input"
               type="checkbox"
               checked={forceNotifyByEnter}
               onChange={e => this.setState({forceNotifyByEnter: e.target.checked})} />
@@ -65,7 +75,8 @@ export class Textarea extends React.Component {
 
           <label className="label">
             Blur:
-            <input className="input"
+            <input
+              className="input"
               type="checkbox"
               checked={forceNotifyOnBlur}
               onChange={e => this.setState({forceNotifyOnBlur: e.target.checked})} />
