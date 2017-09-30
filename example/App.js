@@ -3,6 +3,7 @@ import {Controllable} from './Controllable';
 import {Customizable} from './Customizable';
 import {UndoRedo} from './UndoRedo';
 import {Textarea} from './Textarea';
+import {Ref} from './Ref';
 
 
 export const App = () => (
@@ -26,6 +27,11 @@ export const App = () => (
     <section className="section">
       <h2>Example 4. Debounced Textarea</h2>
       <Textarea />
+    </section>
+
+    <section className="section">
+      <h2>Example 5. Custom ref</h2>
+      <Ref />
     </section>
   </div>
 );

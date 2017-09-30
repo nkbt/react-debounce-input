@@ -17,7 +17,8 @@ export class DebounceInput extends React.PureComponent {
     minLength: PropTypes.number,
     debounceTimeout: PropTypes.number,
     forceNotifyByEnter: PropTypes.bool,
-    forceNotifyOnBlur: PropTypes.bool
+    forceNotifyOnBlur: PropTypes.bool,
+    inputRef: PropTypes.func
   };
 
 
@@ -30,7 +31,8 @@ export class DebounceInput extends React.PureComponent {
     minLength: 0,
     debounceTimeout: 100,
     forceNotifyByEnter: true,
-    forceNotifyOnBlur: true
+    forceNotifyOnBlur: true,
+    inputRef: undefined
   };
 
 
@@ -91,6 +93,30 @@ export class DebounceInput extends React.PureComponent {
   };
 
 
+  onKeyDown = event => {
+    const {onKeyDown} = this.props;
+
+    if (event.key === 'Enter') {
+      this.forceNotify(event);
+    }
+    // Invoke original onKeyDown if present
+    if (onKeyDown) {
+      onKeyDown(event);
+    }
+  };
+
+
+  onBlur = event => {
+    const {onBlur} = this.props;
+
+    this.forceNotify(event);
+    // Invoke original onBlur if present
+    if (onBlur) {
+      onBlur(event);
+    }
+  };
+
+
   createNotifier = debounceTimeout => {
     if (debounceTimeout < 0) {
       this.notify = () => null;
@@ -107,9 +133,7 @@ export class DebounceInput extends React.PureComponent {
         debouncedChangeFunc(event);
       };
 
-      this.flush = () => {
-        debouncedChangeFunc.flush();
-      };
+      this.flush = () => debouncedChangeFunc.flush();
 
       this.cancel = () => {
         this.isDebouncing = false;
@@ -157,55 +181,37 @@ export class DebounceInput extends React.PureComponent {
       forceNotifyOnBlur,
       onKeyDown,
       onBlur,
+      inputRef,
       ...props
     } = this.props;
 
     let maybeOnKeyDown;
-
     if (forceNotifyByEnter) {
-      maybeOnKeyDown = {
-        onKeyDown: event => {
-          if (event.key === 'Enter') {
-            this.forceNotify(event);
-          }
-          // Invoke original onKeyDown if present
-          if (onKeyDown) {
-            onKeyDown(event);
-          }
-        }
-      };
+      maybeOnKeyDown = {onKeyDown: this.onKeyDown};
     } else if (onKeyDown) {
       maybeOnKeyDown = {onKeyDown};
     } else {
       maybeOnKeyDown = {};
     }
 
-
     let maybeOnBlur;
-
     if (forceNotifyOnBlur) {
-      maybeOnBlur = {
-        onBlur: event => {
-          this.forceNotify(event);
-          // Invoke original onBlur if present
-          if (onBlur) {
-            onBlur(event);
-          }
-        }
-      };
+      maybeOnBlur = {onBlur: this.onBlur};
     } else if (onBlur) {
       maybeOnBlur = {onBlur};
     } else {
       maybeOnBlur = {};
     }
 
+    const maybeRef = inputRef ? {ref: inputRef} : {};
 
     return React.createElement(element, {
       ...props,
       onChange: this.onChange,
       value: this.state.value,
       ...maybeOnKeyDown,
-      ...maybeOnBlur
+      ...maybeOnBlur,
+      ...maybeRef
     });
   }
 }
