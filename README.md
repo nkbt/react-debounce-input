@@ -132,6 +132,12 @@ Notification of current value will be sent immediately by hitting `Enter` key. E
 
 Same as `forceNotifyByEnter`, but notification will be sent when focus leaves the input field.
 
+#### `inputRef`: PropTypes.func (default: undefined)
+
+Will pass `ref={inputRef}` to generated input element. We needed to rename `ref` to `inputRef` since `ref` is a special prop in React and cannot be passed to children. 
+
+See [./example/Ref.js](./example/Ref.js) for usage example.
+
 #### Arbitrary props will be transferred to rendered `<input>`
 
 ```js
