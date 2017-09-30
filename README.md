@@ -3,7 +3,6 @@
 [![Gitter](https://img.shields.io/gitter/room/nkbt/help.svg?style=flat-square)](https://gitter.im/nkbt/help)
 
 [![CircleCI](https://img.shields.io/circleci/project/nkbt/react-debounce-input.svg?style=flat-square&label=nix-build)](https://circleci.com/gh/nkbt/react-debounce-input)
-[![Coverage](https://img.shields.io/codecov/c/github/nkbt/react-debounce-input.svg?style=flat-square)](https://codecov.io/github/nkbt/react-debounce-input?branch=master)
 [![Dependencies](https://img.shields.io/david/nkbt/react-debounce-input.svg?style=flat-square)](https://david-dm.org/nkbt/react-debounce-input)
 [![Dev Dependencies](https://img.shields.io/david/dev/nkbt/react-debounce-input.svg?style=flat-square)](https://david-dm.org/nkbt/react-debounce-input#info=devDependencies)
 
@@ -17,6 +16,7 @@ Can be used as drop-in replacement for `<input type="text" />` or `<textarea />`
 ## Installation
 
 ### NPM
+
 ```sh
 npm install --save react react-debounce-input
 ```
@@ -24,15 +24,9 @@ npm install --save react react-debounce-input
 Don't forget to manually install peer dependencies (`react`) if you use npm@3.
 
 
-### Bower:
-```sh
-bower install --save https://unpkg.com/react-debounce-input/bower.zip
-```
-
-
 ### 1998 Script Tag:
 ```html
-<script src="https://unpkg.com/react/dist/react.js"></script>
+<script src="https://unpkg.com/react@16.0.0/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-debounce-input/build/react-debounce-input.js"></script>
 (Module exposed as `DebounceInput`)
 ```
@@ -44,20 +38,18 @@ bower install --save https://unpkg.com/react-debounce-input/bower.zip
 
 ## Codepen demo
 
-[http://codepen.io/nkbt/pen/VvmzLQ](http://codepen.io/nkbt/pen/VvmzLQ?editors=101)
+[http://codepen.io/nkbt/pen/VvmzLQ](http://codepen.io/nkbt/pen/VvmzLQ?editors=0010)
 
 ## Usage
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import DebounceInput from 'react-debounce-input';
+import {DebounceInput} from 'react-debounce-input';
 
-const App = React.createClass({
-  getInitialState() {
-    return {
-      value: ''
-    };
-  },
+class App extends React.Component {
+  state = {
+    value: ''
+  };
 
   render() {
     return (
@@ -71,7 +63,7 @@ const App = React.createClass({
       </div>
     );
   }
-});
+}
 
 const appRoot = document.createElement('div');
 document.body.appendChild(appRoot);
@@ -185,6 +177,9 @@ yarn lint
 yarn test
 
 # to run end-to-end tests
+# first, run `selenium/standalone-firefox:3.4.0` docker image
+docker run -p 4444:4444 selenium/standalone-firefox:3.4.0
+# then run test
 yarn e2e
 ```
 
