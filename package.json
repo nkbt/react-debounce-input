@@ -63,7 +63,7 @@
     "babili-webpack-plugin": "^0.1.2",
     "css-loader": "^0.28.4",
     "eslint": "^4.4.0",
-    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-airbnb": "^16.0.0",
     "eslint-plugin-babel": "^4.1.2",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
