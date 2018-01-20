@@ -70,7 +70,7 @@ export class DebounceInput extends React.PureComponent {
       debounceOptions: debounceOptionsCurrent
     } = this.props;
     if (
-      debounceTimeout !== debounceTimeoutCurrent || 
+      debounceTimeout !== debounceTimeoutCurrent ||
       debounceOptions !== debounceOptionsCurrent
     ) {
       this.createNotifier(debounceTimeout, debounceOptions);
