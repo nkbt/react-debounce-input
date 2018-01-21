@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
+import shallowequal from 'shallowequal';
 
 
 export class DebounceInput extends React.PureComponent {
@@ -71,7 +72,8 @@ export class DebounceInput extends React.PureComponent {
     } = this.props;
     if (
       debounceTimeout !== debounceTimeoutCurrent ||
-      debounceOptions !== debounceOptionsCurrent
+      debounceOptions !== debounceOptionsCurrent ||
+      !shallowequal(debounceOptions, debounceOptionsCurrent)
     ) {
       this.createNotifier(debounceTimeout, debounceOptions);
     }
