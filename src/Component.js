@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
+import shallowequal from 'shallowequal';
 
 
 export class DebounceInput extends React.PureComponent {
@@ -16,6 +17,7 @@ export class DebounceInput extends React.PureComponent {
     ]),
     minLength: PropTypes.number,
     debounceTimeout: PropTypes.number,
+    debounceOptions: PropTypes.object,
     forceNotifyByEnter: PropTypes.bool,
     forceNotifyOnBlur: PropTypes.bool,
     inputRef: PropTypes.func
@@ -30,6 +32,7 @@ export class DebounceInput extends React.PureComponent {
     value: undefined,
     minLength: 0,
     debounceTimeout: 100,
+    debounceOptions: undefined,
     forceNotifyByEnter: true,
     forceNotifyOnBlur: true,
     inputRef: undefined
@@ -48,19 +51,31 @@ export class DebounceInput extends React.PureComponent {
 
 
   componentWillMount() {
-    this.createNotifier(this.props.debounceTimeout);
+    const {
+      debounceTimeout,
+      debounceOptions
+    } = this.props;
+    this.createNotifier(debounceTimeout, debounceOptions);
   }
 
 
-  componentWillReceiveProps({value, debounceTimeout}) {
+  componentWillReceiveProps({value, debounceTimeout, debounceOptions}) {
     if (this.isDebouncing) {
       return;
     }
     if (typeof value !== 'undefined' && this.state.value !== value) {
       this.setState({value});
     }
-    if (debounceTimeout !== this.props.debounceTimeout) {
-      this.createNotifier(debounceTimeout);
+    const {
+      debounceTimeout: debounceTimeoutCurrent,
+      debounceOptions: debounceOptionsCurrent
+    } = this.props;
+    if (
+      debounceTimeout !== debounceTimeoutCurrent ||
+      debounceOptions !== debounceOptionsCurrent ||
+      !shallowequal(debounceOptions, debounceOptionsCurrent)
+    ) {
+      this.createNotifier(debounceTimeout, debounceOptions);
     }
   }
 
@@ -117,7 +132,7 @@ export class DebounceInput extends React.PureComponent {
   };
 
 
-  createNotifier = debounceTimeout => {
+  createNotifier = (debounceTimeout, debounceOptions) => {
     if (debounceTimeout < 0) {
       this.notify = () => null;
     } else if (debounceTimeout === 0) {
@@ -126,7 +141,7 @@ export class DebounceInput extends React.PureComponent {
       const debouncedChangeFunc = debounce(event => {
         this.isDebouncing = false;
         this.doNotify(event);
-      }, debounceTimeout);
+      }, debounceTimeout, debounceOptions);
 
       this.notify = event => {
         this.isDebouncing = true;
