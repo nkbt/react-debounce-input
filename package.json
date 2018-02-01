@@ -3,6 +3,7 @@
   "version": "3.1.0",
   "description": "React component that renders Input with debounced onChange",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "config": {
     "component": "DebounceInput",
     "externals": {
