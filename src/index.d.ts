@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 type WrappedComponent = React.ComponentType<{
-  readonly value?: React.InputHTMLAttributes<WrappedComponent>['value'];
-  readonly onChange?: React.InputHTMLAttributes<WrappedComponent>['onChange'];
+  readonly value?: string | number;
+  readonly onChange?: React.ChangeEventHandler<WrappedComponent>;
 }>;
 
 export interface DebounceInputProps extends React.InputHTMLAttributes<DebounceInput> {
