@@ -52,6 +52,7 @@
     "prop-types": "^15"
   },
   "devDependencies": {
+    "@types/react": "^16.0.36",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.1",
