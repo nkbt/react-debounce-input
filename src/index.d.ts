@@ -9,10 +9,7 @@ interface PropConstraints<T> {
   readonly onChange: React.ChangeEventHandler<T>;
 }
 
-export type DebounceInputProps<
-  WrappedComponent = HTMLInputElement,
-  WrappedComponentProps = React.InputHTMLAttributes<HTMLInputElement>
-> = WrappedComponentProps & {
+export type DebounceInputProps<WrappedComponent,WrappedComponentProps> = WrappedComponentProps & {
   readonly element?: string | React.ComponentType<PropConstraints<WrappedComponent>>;
   readonly type?: string;
   readonly onChange: React.ChangeEventHandler<WrappedComponent>;

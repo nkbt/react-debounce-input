@@ -4,6 +4,7 @@ import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
 //  - usage with default 'input' element:
 
     <DebounceInput
+      className={'some-class'}
       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {}}
     />
 
