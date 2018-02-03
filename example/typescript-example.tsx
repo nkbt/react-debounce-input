@@ -35,7 +35,7 @@ import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
     <DebouncedMyComponent
       element={MyComponent}
       myCustomProp={1}         // OK, myCustomProp will be passed down to MyComponent
-      myInvalidCustomProp={2}  // Error, there is no myInvalidCustomProp in MyComponentProps
+      // myInvalidCustomProp={2}  // Error, there is no myInvalidCustomProp in MyComponentProps
       onChange={(e: React.ChangeEvent<MyComponent>) => {}}
     />
  
