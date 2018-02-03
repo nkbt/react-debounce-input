@@ -12,6 +12,7 @@ pids
 /node_modules/
 
 /build/
+/lib/
 /pub/
 /reports/
 
