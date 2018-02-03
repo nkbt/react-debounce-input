@@ -26,7 +26,10 @@ export type DebounceInputProps<
   readonly inputRef?: React.Ref<WrappedComponent>;
 };
 
-export declare class DebounceInput<C, P> extends React.PureComponent<DebounceInputProps<C, P>> {
+export declare class DebounceInput<
+  WrappedComponent = HTMLInputElement,
+  WrappedComponentProps = React.InputHTMLAttributes<HTMLInputElement>
+> extends React.PureComponent<DebounceInputProps<WrappedComponent, WrappedComponentProps>> {
 
 }
 
