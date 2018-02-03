@@ -9,7 +9,7 @@ import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
 
 //  - usage with 'textarea':
 
-    // DebounceTextArea is just a type, so it should explicitly defined as value
+    // DebounceTextArea is just a type, so it should be explicitly defined as value
     const DebounceTextArea: DebounceTextArea = DebounceInput;
     
     <DebounceTextArea
