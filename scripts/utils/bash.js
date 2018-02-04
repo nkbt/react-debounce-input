@@ -26,7 +26,8 @@ const bash = (cmd, options = {}) => {
   const result = execSync(cleanCmd, Object.assign(
     {stdio: `inherit`},
     options,
-    {env: Object.assign({}, process.env, options.env)}));
+    {env: Object.assign({}, process.env, options.env)}
+  ));
   const stringResult = result ? result.toString().trim() : ``;
   debug(`<<`, stringResult);
   return stringResult;
