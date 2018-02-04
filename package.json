@@ -16,6 +16,7 @@
     "start": "scripts/dev.js",
     "dist": "scripts/dist.js",
     "e2e": "scripts/e2e.js",
+    "selenium": "docker run -p 4444:4444 selenium/standalone-firefox:3.4.0",
     "ghPages": "scripts/ghPages.js",
     "lib": "scripts/lib.js",
     "lint": "scripts/lint.js",
