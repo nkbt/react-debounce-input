@@ -94,7 +94,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__App__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_css__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_css__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__app_css__);
 /* global document */
 
@@ -127,6 +127,8 @@ module.exports = ReactDOM;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Customizable__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UndoRedo__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Textarea__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Ref__ = __webpack_require__(12);
+
 
 
 
@@ -181,6 +183,16 @@ var App = function App() {
         'Example 4. Debounced Textarea'
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Textarea__["a" /* Textarea */], null)
+    ),
+    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'section',
+      { className: 'section' },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h2',
+        null,
+        'Example 5. Custom ref'
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__Ref__["a" /* Ref */], null)
     )
   );
 };
@@ -337,6 +349,30 @@ var DebounceInput = function (_React$PureComponent) {
       });
     };
 
+    _this.onKeyDown = function (event) {
+      var onKeyDown = _this.props.onKeyDown;
+
+
+      if (event.key === 'Enter') {
+        _this.forceNotify(event);
+      }
+      // Invoke original onKeyDown if present
+      if (onKeyDown) {
+        onKeyDown(event);
+      }
+    };
+
+    _this.onBlur = function (event) {
+      var onBlur = _this.props.onBlur;
+
+
+      _this.forceNotify(event);
+      // Invoke original onBlur if present
+      if (onBlur) {
+        onBlur(event);
+      }
+    };
+
     _this.createNotifier = function (debounceTimeout) {
       if (debounceTimeout < 0) {
         _this.notify = function () {
@@ -356,7 +392,7 @@ var DebounceInput = function (_React$PureComponent) {
         };
 
         _this.flush = function () {
-          debouncedChangeFunc.flush();
+          return debouncedChangeFunc.flush();
         };
 
         _this.cancel = function () {
@@ -432,8 +468,6 @@ var DebounceInput = function (_React$PureComponent) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       var _props = this.props,
           element = _props.element,
           _onChange = _props.onChange,
@@ -442,52 +476,35 @@ var DebounceInput = function (_React$PureComponent) {
           _debounceTimeout = _props.debounceTimeout,
           forceNotifyByEnter = _props.forceNotifyByEnter,
           forceNotifyOnBlur = _props.forceNotifyOnBlur,
-          _onKeyDown = _props.onKeyDown,
-          _onBlur = _props.onBlur,
-          props = _objectWithoutProperties(_props, ['element', 'onChange', 'value', 'minLength', 'debounceTimeout', 'forceNotifyByEnter', 'forceNotifyOnBlur', 'onKeyDown', 'onBlur']);
+          onKeyDown = _props.onKeyDown,
+          onBlur = _props.onBlur,
+          inputRef = _props.inputRef,
+          props = _objectWithoutProperties(_props, ['element', 'onChange', 'value', 'minLength', 'debounceTimeout', 'forceNotifyByEnter', 'forceNotifyOnBlur', 'onKeyDown', 'onBlur', 'inputRef']);
 
       var maybeOnKeyDown = void 0;
-
       if (forceNotifyByEnter) {
-        maybeOnKeyDown = {
-          onKeyDown: function onKeyDown(event) {
-            if (event.key === 'Enter') {
-              _this2.forceNotify(event);
-            }
-            // Invoke original onKeyDown if present
-            if (_onKeyDown) {
-              _onKeyDown(event);
-            }
-          }
-        };
-      } else if (_onKeyDown) {
-        maybeOnKeyDown = { onKeyDown: _onKeyDown };
+        maybeOnKeyDown = { onKeyDown: this.onKeyDown };
+      } else if (onKeyDown) {
+        maybeOnKeyDown = { onKeyDown: onKeyDown };
       } else {
         maybeOnKeyDown = {};
       }
 
       var maybeOnBlur = void 0;
-
       if (forceNotifyOnBlur) {
-        maybeOnBlur = {
-          onBlur: function onBlur(event) {
-            _this2.forceNotify(event);
-            // Invoke original onBlur if present
-            if (_onBlur) {
-              _onBlur(event);
-            }
-          }
-        };
-      } else if (_onBlur) {
-        maybeOnBlur = { onBlur: _onBlur };
+        maybeOnBlur = { onBlur: this.onBlur };
+      } else if (onBlur) {
+        maybeOnBlur = { onBlur: onBlur };
       } else {
         maybeOnBlur = {};
       }
 
+      var maybeRef = inputRef ? { ref: inputRef } : {};
+
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(element, _extends({}, props, {
         onChange: this.onChange,
         value: this.state.value
-      }, maybeOnKeyDown, maybeOnBlur));
+      }, maybeOnKeyDown, maybeOnBlur, maybeRef));
     }
   }]);
 
@@ -502,7 +519,8 @@ DebounceInput.defaultProps = {
   minLength: 0,
   debounceTimeout: 100,
   forceNotifyByEnter: true,
-  forceNotifyOnBlur: true
+  forceNotifyOnBlur: true,
+  inputRef: undefined
 };
 
 /***/ }),
@@ -1423,6 +1441,115 @@ var Textarea = function (_React$Component) {
 
 /***/ }),
 /* 12 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Ref; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__src__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+var Ref = function (_React$Component) {
+  _inherits(Ref, _React$Component);
+
+  function Ref() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, Ref);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Ref.__proto__ || Object.getPrototypeOf(Ref)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+      value: '',
+      key: undefined
+    }, _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  _createClass(Ref, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _state = this.state,
+          value = _state.value,
+          key = _state.key;
+
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'config' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'label',
+            { className: 'label' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this2.ref.focus();
+                } },
+              'Focus, please'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'label',
+            { className: 'label' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this2.ref.blur();
+                } },
+              'Blur, please'
+            )
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__src__["DebounceInput"], {
+          inputRef: function inputRef(ref) {
+            _this2.ref = ref;
+          },
+          onChange: function onChange(e) {
+            return _this2.setState({ value: e.target.value });
+          },
+          onKeyDown: function onKeyDown(e) {
+            return _this2.setState({ key: e.key });
+          } }),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          null,
+          'Value: ',
+          value
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'p',
+          null,
+          'Key pressed: ',
+          key
+        )
+      );
+    }
+  }]);
+
+  return Ref;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
