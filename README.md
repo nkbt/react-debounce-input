@@ -157,6 +157,16 @@ Will result in
   className="user-name" />
 ```
 
+## Typescript
+
+This library has typescript typings, import them the same way as in javascript:
+
+```typescript
+import {DebounceInput} from 'react-debounce-input';
+```
+
+Also there are helper types `DebounceTextArea` and `Debounced` to provide strict interfaces for wrapping components different from standard `<input />`. Check usage examples in `example/typescript-example.tsx`.
+
 ## Development and testing
 
 Currently is being developed and tested with the latest stable `Node 8` on `OSX`.
