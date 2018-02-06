@@ -38,10 +38,11 @@ export class UndoRedo extends React.Component {
   };
 
   render() {
-    const history = this.state.history.map((value, key) =>
-      (<span className="item" key={key}>
+    const history = this.state.history.map((value, key) => (
+      <span className="item" key={key}>
         {key === this.state.historyIndex ? <b>{`"${value}"`}</b> : <span>{`"${value}"`}</span>}
-      </span>));
+      </span>
+    ));
 
 
     return (
