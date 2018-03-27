@@ -11,7 +11,7 @@ import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
 //  - usage with 'textarea':
 
     // DebounceTextArea is just a type, so it should be explicitly defined as value
-    const DebounceTextArea: DebounceTextArea = DebounceInput;
+    const DebounceTextArea: DebounceTextArea = DebounceInput as any;
     
     <DebounceTextArea
       element={'textarea'}
@@ -31,7 +31,7 @@ import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
 
     class MyComponent extends React.Component<MyComponentProps> {}
 
-    const DebouncedMyComponent: Debounced<MyComponent, MyComponentProps> = DebounceInput;
+    const DebouncedMyComponent: Debounced<MyComponent, MyComponentProps> = DebounceInput as any;
 
     <DebouncedMyComponent
       element={MyComponent}
