@@ -1,5 +1,5 @@
 /*
- *  check usage examples in ./example/typescript-example.tsx 
+ *  check usage examples in ./example/typescript-example.tsx
  */
 
 import * as React from 'react';
@@ -16,6 +16,7 @@ export type DebounceInputProps<WrappedComponent, WrappedComponentProps> = Wrappe
   readonly onKeyDown?: React.KeyboardEventHandler<WrappedComponent>;
   readonly onBlur?: React.FocusEventHandler<WrappedComponent>;
   readonly value?: string | number;
+  readonly placeholder?: string | number;
   readonly minLength?: number;
   readonly debounceTimeout?: number;
   readonly forceNotifyByEnter?: boolean;
