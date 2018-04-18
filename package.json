@@ -83,7 +83,7 @@
     "react-dom": "^16.2.0",
     "rimraf": "^2.6.1",
     "serve-static": "^1.12.3",
-    "style-loader": "^0.20.1",
+    "style-loader": "^0.21.0",
     "tape": "^4.8.0",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
