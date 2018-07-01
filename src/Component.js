@@ -39,8 +39,15 @@ export class DebounceInput extends React.PureComponent {
   constructor(props) {
     super(props);
 
+    let value = '';
+    if (props.type === 'number') {
+      value = props.value || '0';
+    } else {
+      value = props.value || '';
+    }
+
     this.state = {
-      value: props.value || ''
+      value
     };
 
     this.isDebouncing = false;

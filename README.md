@@ -134,7 +134,7 @@ Same as `forceNotifyByEnter`, but notification will be sent when focus leaves th
 
 #### `inputRef`: PropTypes.func (default: undefined)
 
-Will pass `ref={inputRef}` to generated input element. We needed to rename `ref` to `inputRef` since `ref` is a special prop in React and cannot be passed to children. 
+Will pass `ref={inputRef}` to generated input element. We needed to rename `ref` to `inputRef` since `ref` is a special prop in React and cannot be passed to children.
 
 See [./example/Ref.js](./example/Ref.js) for usage example.
 
@@ -156,6 +156,10 @@ Will result in
   placeholder="Name"
   className="user-name" />
 ```
+
+#### `type`: PropTypes.string (default: text)
+
+The `type` of input field that will be created, is based on this value. For extensive list refer to [MDN docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input).
 
 ## Typescript
 
