@@ -40,10 +40,9 @@ export class DebounceInput extends React.PureComponent {
     super(props);
 
     this.state = {
-      value: props.value || ''
+      value: props.value || '',
+      isDebouncing: false
     };
-
-    this.isDebouncing = false;
   }
 
 
@@ -52,17 +51,18 @@ export class DebounceInput extends React.PureComponent {
   }
 
 
-  componentWillReceiveProps({value, debounceTimeout}) {
-    if (this.isDebouncing) {
-      return;
-    }
-    if (typeof value !== 'undefined' && this.state.value !== value) {
-      this.setState({value});
-    }
-    if (debounceTimeout !== this.props.debounceTimeout) {
-      this.createNotifier(debounceTimeout);
-    }
-  }
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		if (prevProps.debounceTimeout !== this.props.debounceTimeout) {
+      this.createNotifier(this.props.debounceTimeout)
+		}
+	}
+
+	static getDerivedStateFromProps({ value: propsValue, debounceTimeout }, { isDebouncing, value: stateValue }) {
+		if (isDebouncing && typeof propsValue !== 'undefined' && stateValue !== propsValue) {
+			return { value: propsValue }
+		}
+		return null
+	}
 
 
   componentWillUnmount() {
@@ -124,19 +124,19 @@ export class DebounceInput extends React.PureComponent {
       this.notify = this.doNotify;
     } else {
       const debouncedChangeFunc = debounce(event => {
-        this.isDebouncing = false;
+        this.setState({isDebouncing: false)};
         this.doNotify(event);
       }, debounceTimeout);
 
       this.notify = event => {
-        this.isDebouncing = true;
+        this.setState({isDebouncing: true)};
         debouncedChangeFunc(event);
       };
 
       this.flush = () => debouncedChangeFunc.flush();
 
       this.cancel = () => {
-        this.isDebouncing = false;
+        this.setState({isDebouncing: false)};
         debouncedChangeFunc.cancel();
       };
     }
@@ -151,7 +151,7 @@ export class DebounceInput extends React.PureComponent {
 
 
   forceNotify = event => {
-    if (!this.isDebouncing) {
+    if (!this.state.isDebouncing) {
       return;
     }
 
