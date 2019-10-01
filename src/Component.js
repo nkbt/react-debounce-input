@@ -47,24 +47,6 @@ export class DebounceInput extends React.PureComponent {
   }
 
 
-  componentWillMount() {
-    this.createNotifier(this.props.debounceTimeout);
-  }
-
-
-  componentWillReceiveProps({value, debounceTimeout}) {
-    if (this.isDebouncing) {
-      return;
-    }
-    if (typeof value !== 'undefined' && this.state.value !== value) {
-      this.setState({value});
-    }
-    if (debounceTimeout !== this.props.debounceTimeout) {
-      this.createNotifier(debounceTimeout);
-    }
-  }
-
-
   componentWillUnmount() {
     if (this.flush) {
       this.flush();
@@ -115,6 +97,26 @@ export class DebounceInput extends React.PureComponent {
       onBlur(event);
     }
   };
+
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillMount() {
+    this.createNotifier(this.props.debounceTimeout);
+  }
+
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps({value, debounceTimeout}) {
+    if (this.isDebouncing) {
+      return;
+    }
+    if (typeof value !== 'undefined' && this.state.value !== value) {
+      this.setState({value});
+    }
+    if (debounceTimeout !== this.props.debounceTimeout) {
+      this.createNotifier(debounceTimeout);
+    }
+  }
 
 
   createNotifier = debounceTimeout => {
