@@ -27,7 +27,7 @@
     "lint": "eslint .",
     "prepub": "rm -rf ./pub",
     "pub": "NODE_ENV=production webpack-cli --config ./webpack/pub.config.js",
-    "test": "node test/Collapse-test.js",
+    "test": "node test/Component-test.js",
     "prepublishOnly": "yarn build",
     "postversion": "git push --follow-tags",
     "nuke": "rm -rf node_modules yarn.lock",
