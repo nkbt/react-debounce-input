@@ -19,11 +19,11 @@ export class Ref extends React.Component {
       <div>
         <div className="config">
           <label className="label">
-            <button onClick={() => this.ref.focus()}>Focus, please</button>
+            <button type="button" onClick={() => this.ref.focus()}>Focus, please</button>
           </label>
 
           <label className="label">
-            <button onClick={() => this.ref.blur()}>Blur, please</button>
+            <button type="button" onClick={() => this.ref.blur()}>Blur, please</button>
           </label>
         </div>
 

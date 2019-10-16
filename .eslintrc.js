@@ -42,6 +42,8 @@ module.exports = {
       minProperties: 0
     }],
 
-    'react/state-in-constructor': 'off'
+    'react/state-in-constructor': 'off',
+    'react/jsx-one-expression-per-line': 'off',
+    'react/no-array-index-key': 'off'
   }
 };

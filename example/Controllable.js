@@ -8,6 +8,13 @@ export class Controllable extends React.Component {
     debouncedValue: ''
   };
 
+
+  onChange = e => this.setState({
+    value: e.target.value,
+    debouncedValue: e.target.value
+  });
+
+
   render() {
     const {value, debouncedValue} = this.state;
 
@@ -33,8 +40,7 @@ export class Controllable extends React.Component {
               value={value}
               minLength={2}
               debounceTimeout={500}
-              onChange={e =>
-                this.setState({value: e.target.value, debouncedValue: e.target.value})} />
+              onChange={this.onChange} />
             {debouncedValue}
           </label>
         </div>

@@ -21,7 +21,7 @@ babel({
 });
 
 const test = require('tape');
-const {DebounceInput} = require('../src/DebounceInput');
+const {DebounceInput} = require('../src');
 
 test('DebounceInput', t => {
   t.ok(DebounceInput instanceof Function, 'should be function');
