@@ -1,14 +1,12 @@
-/* global document */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {App} from './App';
 import './app.css';
 
 
-const appRoot = document.createElement(`div`);
+const appRoot = document.createElement('div');
 
 
-appRoot.id = `app`;
+appRoot.id = 'app';
 document.body.appendChild(appRoot);
 ReactDOM.render(<App />, appRoot);
