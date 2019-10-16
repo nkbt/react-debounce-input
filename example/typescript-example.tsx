@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
+import { DebounceInput, DebounceTextArea, Debounced } from "../src";
 
 //  - usage with default 'input' element:
 
@@ -12,7 +12,7 @@ import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
 
     // DebounceTextArea is just a type, so it should be explicitly defined as value
     const DebounceTextArea: DebounceTextArea = DebounceInput;
-    
+
     <DebounceTextArea
       element={'textarea'}
       rows={1}
@@ -25,8 +25,8 @@ import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
     interface MyComponentProps {
       value?: string | number;
       onChange: React.ChangeEventHandler<MyComponent>;
-      
-      myCustomProp: number; 
+
+      myCustomProp: number;
     }
 
     class MyComponent extends React.Component<MyComponentProps> {}
@@ -39,4 +39,4 @@ import { DebounceInput, DebounceTextArea, Debounced } from "../src/index";
       // myInvalidCustomProp={2}  // Error, there is no myInvalidCustomProp in MyComponentProps
       onChange={(e: React.ChangeEvent<MyComponent>) => {}}
     />
- 
+
