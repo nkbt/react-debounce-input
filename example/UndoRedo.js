@@ -20,11 +20,13 @@ export class UndoRedo extends React.Component {
   };
 
   onRedo = () => {
-    this.setValueFromHistory(this.state.historyIndex + 1);
+    const {historyIndex} = this.state;
+    this.setValueFromHistory(historyIndex + 1);
   };
 
   onUndo = () => {
-    this.setValueFromHistory(this.state.historyIndex - 1);
+    const {historyIndex} = this.state;
+    this.setValueFromHistory(historyIndex - 1);
   };
 
   setValueFromHistory = index => {
@@ -38,11 +40,7 @@ export class UndoRedo extends React.Component {
   };
 
   render() {
-    const history = this.state.history.map((value, key) => (
-      <span className="item" key={key}>
-        {key === this.state.historyIndex ? <b>{`"${value}"`}</b> : <span>{`"${value}"`}</span>}
-      </span>
-    ));
+    const {history, value, historyIndex} = this.state;
 
 
     return (
@@ -52,7 +50,7 @@ export class UndoRedo extends React.Component {
             Debounced Input:
             <DebounceInput
               className="input"
-              value={this.state.value}
+              value={value}
               minLength={2}
               debounceTimeout={500}
               forceNotifyOnBlur={false}
@@ -60,17 +58,24 @@ export class UndoRedo extends React.Component {
           </label>
 
           <label className="label">
-            <button className="input" onClick={this.onUndo}>Undo</button>
+            <button type="button" className="input" onClick={this.onUndo}>Undo</button>
           </label>
 
           <label className="label">
-            <button className="input" onClick={this.onRedo}>Redo</button>
+            <button type="button" className="input" onClick={this.onRedo}>Redo</button>
           </label>
         </div>
 
-        <p>Current Value: {this.state.value}</p>
-        <p>History: {history}</p>
-        <p>History Index: {this.state.historyIndex}</p>
+        <p>Current Value: {value}</p>
+        <p>
+          History:
+          {history.map((val, key) => (
+            <span className="item" key={key}>
+              {key === historyIndex ? <b>{`"${val}"`}</b> : <span>{`"${val}"`}</span>}
+            </span>
+          ))}
+        </p>
+        <p>History Index: {historyIndex}</p>
       </div>
     );
   }

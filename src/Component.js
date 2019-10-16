@@ -47,19 +47,25 @@ export class DebounceInput extends React.PureComponent {
   }
 
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
-    this.createNotifier(this.props.debounceTimeout);
+    const {debounceTimeout} = this.props;
+    this.createNotifier(debounceTimeout);
   }
 
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillReceiveProps({value, debounceTimeout}) {
     if (this.isDebouncing) {
       return;
     }
-    if (typeof value !== 'undefined' && this.state.value !== value) {
+    const {debounceTimeout: oldTimeout} = this.props;
+    const {value: stateValue} = this.state;
+
+    if (typeof value !== 'undefined' && stateValue !== value) {
       this.setState({value});
     }
-    if (debounceTimeout !== this.props.debounceTimeout) {
+    if (debounceTimeout !== oldTimeout) {
       this.createNotifier(debounceTimeout);
     }
   }
@@ -75,12 +81,13 @@ export class DebounceInput extends React.PureComponent {
   onChange = event => {
     event.persist();
 
-    const oldValue = this.state.value;
+    const {value: oldValue} = this.state;
+    const {minLength} = this.props;
 
     this.setState({value: event.target.value}, () => {
       const {value} = this.state;
 
-      if (value.length >= this.props.minLength) {
+      if (value.length >= minLength) {
         this.notify(event);
         return;
       }
@@ -184,6 +191,7 @@ export class DebounceInput extends React.PureComponent {
       inputRef,
       ...props
     } = this.props;
+    const {value} = this.state;
 
     let maybeOnKeyDown;
     if (forceNotifyByEnter) {
@@ -208,7 +216,7 @@ export class DebounceInput extends React.PureComponent {
     return React.createElement(element, {
       ...props,
       onChange: this.onChange,
-      value: this.state.value,
+      value,
       ...maybeOnKeyDown,
       ...maybeOnBlur,
       ...maybeRef
