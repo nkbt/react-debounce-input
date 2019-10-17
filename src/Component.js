@@ -39,30 +39,26 @@ export class DebounceInput extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      value: props.value || ''
-    };
-
     this.isDebouncing = false;
-  }
+    this.state = {value: props.value || ''};
 
-
-  // eslint-disable-next-line react/no-deprecated
-  componentWillMount() {
     const {debounceTimeout} = this.props;
     this.createNotifier(debounceTimeout);
   }
 
 
-  // eslint-disable-next-line react/no-deprecated
-  componentWillReceiveProps({value, debounceTimeout}) {
+  componentDidUpdate(prevProps) {
     if (this.isDebouncing) {
       return;
     }
-    const {debounceTimeout: oldTimeout} = this.props;
+    const {value, debounceTimeout} = this.props;
+
+    const {debounceTimeout: oldTimeout, value: oldValue} = prevProps;
     const {value: stateValue} = this.state;
 
-    if (typeof value !== 'undefined' && stateValue !== value) {
+    if (typeof value !== 'undefined' && oldValue !== value && stateValue !== value) {
+      // Update state.value if new value passed via props, yep re-render should happen
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({value});
     }
     if (debounceTimeout !== oldTimeout) {
