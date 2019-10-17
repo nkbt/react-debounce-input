@@ -97,24 +97,24 @@ export class DebounceInput extends React.PureComponent {
 
 
   onKeyDown = event => {
-    const {onKeyDown} = this.props;
-
     if (event.key === 'Enter') {
       this.forceNotify(event);
     }
     // Invoke original onKeyDown if present
+    const {onKeyDown} = this.props;
     if (onKeyDown) {
+      event.persist();
       onKeyDown(event);
     }
   };
 
 
   onBlur = event => {
-    const {onBlur} = this.props;
-
     this.forceNotify(event);
     // Invoke original onBlur if present
+    const {onBlur} = this.props;
     if (onBlur) {
+      event.persist();
       onBlur(event);
     }
   };
@@ -154,7 +154,8 @@ export class DebounceInput extends React.PureComponent {
 
 
   forceNotify = event => {
-    if (!this.isDebouncing) {
+    const {debounceTimeout} = this.props;
+    if (!this.isDebouncing && debounceTimeout > 0) {
       return;
     }
 
