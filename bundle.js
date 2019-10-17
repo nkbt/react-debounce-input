@@ -2519,25 +2519,27 @@ function (_React$PureComponent) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "onKeyDown", function (event) {
-      var onKeyDown = _this.props.onKeyDown;
-
       if (event.key === 'Enter') {
         _this.forceNotify(event);
       } // Invoke original onKeyDown if present
 
 
+      var onKeyDown = _this.props.onKeyDown;
+
       if (onKeyDown) {
+        event.persist();
         onKeyDown(event);
       }
     });
 
     _defineProperty(_assertThisInitialized(_this), "onBlur", function (event) {
-      var onBlur = _this.props.onBlur;
-
       _this.forceNotify(event); // Invoke original onBlur if present
 
 
+      var onBlur = _this.props.onBlur;
+
       if (onBlur) {
+        event.persist();
         onBlur(event);
       }
     });
@@ -2578,7 +2580,9 @@ function (_React$PureComponent) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "forceNotify", function (event) {
-      if (!_this.isDebouncing) {
+      var debounceTimeout = _this.props.debounceTimeout;
+
+      if (!_this.isDebouncing && debounceTimeout > 0) {
         return;
       }
 
