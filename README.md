@@ -109,7 +109,7 @@ Function called when value is changed (debounced) with original event passed thr
 Value of the Input box. Can be omitted, so component works as usual non-controlled input.
 
 
-### `minLength`: PropTypes.number (default: 2)
+### `minLength`: PropTypes.number (default: 0)
 
 Minimal length of text to start notify, if value becomes shorter then `minLength` (after removing some characters), there will be a notification with empty value `''`.
 
