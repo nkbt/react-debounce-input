@@ -40,7 +40,7 @@ export class DebounceInput extends React.PureComponent {
     super(props);
 
     this.isDebouncing = false;
-    this.state = {value: props.value || ''};
+    this.state = {value: typeof props.value === 'undefined' || props.value === null ? '' : props.value};
 
     const {debounceTimeout} = this.props;
     this.createNotifier(debounceTimeout);
