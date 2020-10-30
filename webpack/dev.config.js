@@ -11,7 +11,7 @@ const {
 
 module.exports = {
   mode,
-  devtool: 'eval',
+  devtool: 'source-map',
 
   entry: [
     pathTo('example', 'index.js'),
