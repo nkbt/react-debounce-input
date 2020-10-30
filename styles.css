@@ -11,6 +11,10 @@
   padding-bottom: 20px;
 }
 
+.config button {
+  margin: 5px 0;
+}
+
 .label {
   padding-right: 20px;
 }
