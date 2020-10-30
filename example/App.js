@@ -4,6 +4,7 @@ import {Customizable} from './Customizable';
 import {UndoRedo} from './UndoRedo';
 import {Textarea} from './Textarea';
 import {Ref} from './Ref';
+import {Falsy} from './Falsy';
 
 
 export const App = () => (
@@ -32,6 +33,11 @@ export const App = () => (
     <section className="section">
       <h2>Example 5. Custom ref</h2>
       <Ref />
+    </section>
+
+    <section className="section">
+      <h2>Example 6. Falsy value</h2>
+      <Falsy />
     </section>
   </div>
 );

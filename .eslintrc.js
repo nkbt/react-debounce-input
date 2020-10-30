@@ -7,6 +7,7 @@ module.exports = {
   rules: {
     'arrow-parens': ['error', 'as-needed'],
     'comma-dangle': ['error', 'never'],
+    'eqeqeq': ['error', 'always'],
     'object-curly-spacing': ['error', 'never'],
     'no-console': 'off',
     'global-require': 'off',
