@@ -75,6 +75,8 @@ ReactDOM.render(<App />, appRoot);
 
 You can specify element="textarea". For Example:
 
+Here is a [demo](https://www.jinno.io/app/19/element?source=react-debounce-input)
+
 ```js
 <DebounceInput element="textarea" />
 ```
@@ -103,31 +105,43 @@ Will result in
 
 ### `onChange`: PropTypes.func.isRequired
 
+Here is a [demo](https://www.jinno.io/app/19/onChange?source=react-debounce-input)
+
 Function called when value is changed (debounced) with original event passed through
 
 
 ### `value`: PropTypes.string
+
+Here is a [demo](https://www.jinno.io/app/19/value?source=react-debounce-input)
 
 Value of the Input box. Can be omitted, so component works as usual non-controlled input.
 
 
 ### `minLength`: PropTypes.number (default: 0)
 
+Here is a [demo](https://www.jinno.io/app/19/minLength?source=react-debounce-input)
+
 Minimal length of text to start notify, if value becomes shorter then `minLength` (after removing some characters), there will be a notification with empty value `''`.
 
 
 ### `debounceTimeout`: PropTypes.number (default: 100)
+
+Here is a [demo](https://www.jinno.io/app/19/debounceTimeout?source=react-debounce-input)
 
 Notification debounce timeout in ms. If set to `-1`, disables automatic notification completely. Notification will only happen by pressing `Enter` then.
 
 
 ### `forceNotifyByEnter`: PropTypes.bool (default: true)
 
+Here is a [demo](https://www.jinno.io/app/19/forceNotifyByEnter?source=react-debounce-input)
+
 Notification of current value will be sent immediately by hitting `Enter` key. Enabled by-default. Notification value follows the same rule as with debounced notification, so if Length is less, then `minLength` - empty value `''` will be sent back.
 
 *NOTE* if `onKeyDown` callback prop was present, it will be still invoked transparently.
 
 ### `forceNotifyOnBlur`: PropTypes.bool (default: true)
+
+Here is a [demo](https://www.jinno.io/app/19/forceNotifyOnBlur?source=react-debounce-input)
 
 Same as `forceNotifyByEnter`, but notification will be sent when focus leaves the input field.
 
