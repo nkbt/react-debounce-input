@@ -6,8 +6,6 @@
 
 React component that renders an Input, Textarea or other element with debounced onChange. Can be used as drop-in replacement for `<input type="text" />` or `<textarea />`
 
-[Live example and code](https://www.jinno.io/app/19/?source=react-debounce-input)
-
 ![React Debounce Input](./example/react-debounce-input.gif)
 
 ## Live design system demo
