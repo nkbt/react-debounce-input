@@ -5,10 +5,8 @@ module.exports = {
     browser: true
   },
   rules: {
-    'no-multiple-empty-lines': ["error", {"max": 2}],
     'arrow-parens': ['error', 'as-needed'],
     'comma-dangle': ['error', 'never'],
-    'eqeqeq': ['error', 'always'],
     'object-curly-spacing': ['error', 'never'],
     'no-console': 'off',
     'global-require': 'off',
@@ -24,7 +22,7 @@ module.exports = {
         'lifecycle',
         'everything-else',
         'render'
-      ],
+      ]
     }],
     'react/jsx-filename-extension': ['error', {extensions: ['.js']}],
     'react/jsx-closing-bracket-location': ['error', {
@@ -46,6 +44,8 @@ module.exports = {
 
     'react/state-in-constructor': 'off',
     'react/jsx-one-expression-per-line': 'off',
-    'react/no-array-index-key': 'off'
+    'react/no-array-index-key': 'off',
+
+    'no-multiple-empty-lines': 'off'
   }
 };

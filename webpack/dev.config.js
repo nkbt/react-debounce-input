@@ -11,7 +11,7 @@ const {
 
 module.exports = {
   mode,
-  devtool: 'source-map',
+  devtool: 'eval',
 
   entry: [
     pathTo('example', 'index.js'),
@@ -20,6 +20,11 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: pathTo('dev')
+  },
+  optimization: {
+    minimize: false,
+    moduleIds: 'named',
+    chunkIds: 'named'
   },
   plugins: [
     plugins.html
