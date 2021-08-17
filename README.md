@@ -8,7 +8,11 @@ React component that renders an Input, Textarea or other element with debounced 
 
 ![React Debounce Input](./example/react-debounce-input.gif)
 
-## Demo
+## Live design system demo
+
+[https://www.jinno.io/app/19](https://www.jinno.io/app/19/?source=react-debounce-input)
+
+## Simple web demo
 
 [http://nkbt.github.io/react-debounce-input](http://nkbt.github.io/react-debounce-input)
 
