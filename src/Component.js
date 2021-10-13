@@ -56,7 +56,7 @@ export class DebounceInput extends React.PureComponent {
     const {debounceTimeout: oldTimeout, value: oldValue} = prevProps;
     const {value: stateValue} = this.state;
 
-    if (typeof value !== 'undefined' && oldValue !== value && stateValue !== value) {
+    if (typeof value !== 'undefined' && oldValue !== value || stateValue !== value) {
       // Update state.value if new value passed via props, yep re-render should happen
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({value});
