@@ -2,7 +2,7 @@ import React, {useState, useCallback} from 'react';
 import {DebounceInput} from '../src';
 
 
-export const DefaultValue = () => {
+export function DefaultValue() {
   const [type, setType] = useState('number');
   const [value, setValue] = useState(0);
 
@@ -122,4 +122,4 @@ export const DefaultValue = () => {
       <p>Value: {JSON.stringify(value)}</p>
     </>
   );
-};
+}
