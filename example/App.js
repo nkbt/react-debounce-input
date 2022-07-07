@@ -42,11 +42,11 @@ export function App() {
         <DefaultValue />
       </section>
 
-        <section className="section">
-            <h2>Example 7. With External Validation</h2>
-            <MinMax />
-            <p>Accepts values between 10 and 100</p>
-        </section>
+      <section className="section">
+        <h2>Example 7. With External Validation</h2>
+        <MinMax />
+        <p>Accepts values between 10 and 100</p>
+      </section>
     </div>
   );
 }

@@ -53,7 +53,7 @@ export class DebounceInput extends React.PureComponent {
     }
     const {value, debounceTimeout} = this.props;
 
-    const {debounceTimeout: oldTimeout, value: oldValue} = prevProps;
+    const {debounceTimeout: oldTimeout} = prevProps;
     const {value: stateValue} = this.state;
 
     if (typeof value !== 'undefined' && stateValue !== value) {
