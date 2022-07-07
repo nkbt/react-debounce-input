@@ -4,6 +4,7 @@ import {Customizable} from './Customizable';
 import {UndoRedo} from './UndoRedo';
 import {Textarea} from './Textarea';
 import {Ref} from './Ref';
+import {MinMax} from './MinMax';
 import {DefaultValue} from './DefaultValue';
 
 
@@ -40,6 +41,12 @@ export function App() {
         <h2>Example 6. Create with default value</h2>
         <DefaultValue />
       </section>
+
+        <section className="section">
+            <h2>Example 7. With External Validation</h2>
+            <MinMax />
+            <p>Accepts values between 10 and 100</p>
+        </section>
     </div>
   );
 }
