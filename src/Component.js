@@ -210,13 +210,13 @@ export class DebounceInput extends React.PureComponent {
 
     const maybeRef = inputRef ? {ref: inputRef} : {};
 
-    return React.createElement(element, {
+    return (React.createElement(element, {
       ...props,
       onChange: this.onChange,
       value,
       ...maybeOnKeyDown,
       ...maybeOnBlur,
       ...maybeRef
-    });
+    }));
   }
 }
