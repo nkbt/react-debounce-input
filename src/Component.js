@@ -53,10 +53,10 @@ export class DebounceInput extends React.PureComponent {
     }
     const {value, debounceTimeout} = this.props;
 
-    const {debounceTimeout: oldTimeout, value: oldValue} = prevProps;
+    const {debounceTimeout: oldTimeout} = prevProps;
     const {value: stateValue} = this.state;
 
-    if (typeof value !== 'undefined' && oldValue !== value && stateValue !== value) {
+    if (typeof value !== 'undefined' && stateValue !== value) {
       // Update state.value if new value passed via props, yep re-render should happen
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({value});
@@ -78,8 +78,9 @@ export class DebounceInput extends React.PureComponent {
     event.persist();
 
     const {value: oldValue} = this.state;
-    const {minLength} = this.props;
+    const {debounceTimeout, minLength} = this.props;
 
+    if (debounceTimeout > 0) this.isDebouncing = true;
     this.setState({value: event.target.value}, () => {
       const {value} = this.state;
 
@@ -132,7 +133,6 @@ export class DebounceInput extends React.PureComponent {
       }, debounceTimeout);
 
       this.notify = event => {
-        this.isDebouncing = true;
         debouncedChangeFunc(event);
       };
 
